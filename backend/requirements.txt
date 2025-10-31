@@ -1,0 +1,8 @@
+google-cloud-texttospeech
+Flask
+python-dotenv
+google-genai # For Multimodal LLM (Gemini)
+# The actual Text-to-Speech library will depend on the choice 
+# (e.g., google-cloud-texttospeech for Google Cloud TTS)
+Pillow
+Flask-CORS
