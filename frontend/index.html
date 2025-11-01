@@ -4,686 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Device DigiHelp - AI Manuals & Tech Support</title>
-    <!-- Font changed to Roboto -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- Base & Reset --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            /* Font changed to Roboto */
-            font-family: 'Roboto', sans-serif;
-            background-color: #F9FAFB; /* bg-gray-50 */
-            color: #1F2937; /* text-gray-800 */
-            line-height: 1.5;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        button, input, textarea {
-            font-family: inherit;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; background-color: #F9FAFB; color: #1F2937; line-height: 1.5; }
+        a { color: inherit; text-decoration: inherit; }
+        button, input, textarea, select { font-family: inherit; }
 
         /* --- Utility & Layout --- */
-        .container {
-            width: 100%;
-            max-width: 1280px; /* From Tailwind container */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem; /* px-6 */
-            padding-right: 1.5rem; /* px-6 */
-        }
+        .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 
         /* --- Header & Navigation --- */
-        header {
-            background-color: rgba(255, 255, 255, 0.95); /* bg-white/95 */
-            backdrop-filter: blur(4px); /* backdrop-blur-sm */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        header nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-
-        .logo {
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: 700; /* font-bold */
-            color: #111827; /* text-gray-900 */
-        }
-
-        .logo span {
-            color: #2563EB; /* text-blue-600 */
-        }
-
-        .nav-links {
-            display: none; /* hidden */
-            column-gap: 1.5rem; /* space-x-6 */
-            align-items: center;
-        }
-
-        .nav-link {
-            color: #4B5563; /* text-gray-600 */
-            transition: color 0.15s ease;
-        }
-
-        .nav-link:hover {
-            color: #2563EB; /* hover:text-blue-600 */
-        }
-
-        .nav-link-active {
-            color: #3b82f6; /* blue-500 */
-            font-weight: 600; /* font-semibold */
-        }
-
-        #mobile-menu-btn {
-            display: block; /* md:hidden */
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #374151; /* text-gray-700 */
-        }
-
-        #mobile-menu-btn svg {
-            width: 1.5rem; /* w-6 */
-            height: 1.5rem; /* h-6 */
-        }
-
-        #mobile-menu {
-            display: none; /* hidden */
-            background-color: #ffffff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-        }
-
-        #mobile-menu .nav-link {
-            display: block;
-            padding: 0.75rem 1.5rem; /* px-6 py-3 */
-        }
-        
-        #mobile-menu .nav-link:hover {
-            background-color: #EFF6FF; /* hover:bg-blue-50 */
-        }
+        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 50; }
+        header nav { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; padding-bottom: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #111827; }
+        .logo span { color: #2563EB; }
+        .nav-links { display: none; column-gap: 1.5rem; align-items: center; }
+        .nav-link { color: #4B5563; transition: color 0.15s ease; }
+        .nav-link:hover { color: #2563EB; }
+        .nav-link-active { color: #3b82f6; font-weight: 600; }
+        #mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: #374151; }
+        #mobile-menu-btn svg { width: 1.5rem; height: 1.5rem; }
+        #mobile-menu { display: none; background-color: #ffffff; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        #mobile-menu .nav-link { display: block; padding: 0.75rem 1.5rem; }
+        #mobile-menu .nav-link:hover { background-color: #EFF6FF; }
 
         /* --- Hero Section --- */
-        #home {
-            background-color: #ffffff;
-            padding-top: 5rem; /* pt-20 */
-            padding-bottom: 6rem; /* pb-24 */
-            text-align: center;
-        }
-
-        #home h1 {
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 700; /* font-bold */
-            color: #111827; /* text-gray-900 */
-            line-height: 1.25;
-        }
-
-        #home .subtitle {
-            margin-top: 1.5rem; /* mt-6 */
-            font-size: 1.125rem; /* text-lg */
-            color: #4B5563; /* text-gray-600 */
-            max-width: 56rem; /* max-w-3xl */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #home .button-group {
-            margin-top: 2.5rem; /* mt-10 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            row-gap: 1rem; /* space-y-4 */
-        }
+        #home { background-color: #ffffff; padding-top: 5rem; padding-bottom: 6rem; text-align: center; }
+        #home h1 { font-size: 2.25rem; font-weight: 700; color: #111827; line-height: 1.25; }
+        #home .subtitle { margin-top: 1.5rem; font-size: 1.125rem; color: #4B5563; max-width: 56rem; margin-left: auto; margin-right: auto; }
+        #home .button-group { margin-top: 2.5rem; display: flex; flex-direction: column; justify-content: center; row-gap: 1rem; }
+        .btn { font-weight: 500; padding: 0.75rem 2rem; border-radius: 0.5rem; font-size: 1.125rem; transition: background-color 0.15s ease; cursor: pointer; }
+        .btn-primary { background-color: #2563EB; color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: none; }
+        .btn-primary:hover { background-color: #1D4ED8; }
+        .btn-secondary { background-color: #E5E7EB; color: #1F2937; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .btn-secondary:hover { background-color: #D1D5DB; }
         
-        .btn {
-            font-weight: 500; /* font-medium */
-            padding: 0.75rem 2rem; /* py-3 px-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            font-size: 1.125rem; /* text-lg */
-            transition: background-color 0.15s ease;
-            cursor: pointer;
+        /* Disabled button style */
+        .btn:disabled {
+            background-color: #9CA3AF; /* bg-gray-400 */
+            color: #E5E7EB; /* text-gray-200 */
+            cursor: not-allowed;
+            box-shadow: none;
         }
-        
-        .btn-primary {
-            background-color: #2563EB; /* bg-blue-600 */
-            color: #ffffff; /* text-white */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            border: none;
+        .btn:disabled:hover {
+            background-color: #9CA3AF;
         }
 
-        .btn-primary:hover {
-            background-color: #1D4ED8; /* hover:bg-blue-700 */
-        }
-        
-        .btn-secondary {
-            background-color: #E5E7EB; /* bg-gray-200 */
-            color: #1F2937; /* text-gray-800 */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-        }
 
-        .btn-secondary:hover {
-            background-color: #D1D5DB; /* hover:bg-gray-300 */
-        }
-        
         /* --- Shared Section Styles --- */
-        section {
-            padding-top: 5rem; /* py-20 */
-            padding-bottom: 5rem; /* py-20 */
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem; /* mb-16 */
-        }
-        
-        .section-header h2 {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-            color: #111827; /* text-gray-900 */
-        }
-
-        .section-header p {
-            margin-top: 1rem; /* mt-4 */
-            font-size: 1.125rem; /* text-lg */
-            color: #4B5563; /* text-gray-600 */
-            max-width: 42rem; /* max-w-2xl */
-            margin-left: auto;
-            margin-right: auto;
-        }
+        section { padding-top: 5rem; padding-bottom: 5rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 1.875rem; font-weight: 700; color: #111827; }
+        .section-header p { margin-top: 1rem; font-size: 1.125rem; color: #4B5563; max-width: 42rem; margin-left: auto; margin-right: auto; }
 
         /* Card styles for Generator, About */
-        .card {
-            background-color: #ffffff;
-            padding: 2rem; /* p-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            border: 1px solid #E5E7EB; /* border border-gray-200 */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-            /* min-height: 345px; */ /* Removed */
+        .card { 
+            background-color: #ffffff; 
+            padding: 2rem; 
+            border-radius: 0.5rem; 
+            border: 1px solid #E5E7EB; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
+            display: flex; /* Added flex */
+            flex-direction: column; /* Added column */
         }
-        
-        .card h3 {
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: 600; /* font-semibold */
-            color: #111827; /* text-gray-900 */
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
+        .card h3 { font-size: 1.5rem; font-weight: 600; color: #111827; margin-bottom: 1.5rem; }
 
         /* --- AI Generator Section --- */
-        #generator {
-            background-color: #F9FAFB; /* bg-gray-50 */
-        }
-
-        #generator .grid-container {
-            max-width: 64rem; /* max-w-4xl */
-            margin-left: auto;
-            margin-right: auto;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem; /* gap-8 */
-            align-items: start;
-        }
-
-        #drop-zone {
-            width: 100%;
-            padding: 2.5rem; /* p-10 */
-            border-radius: 0.5rem; /* rounded-lg */
-            text-align: center;
-            cursor: pointer;
-            border: 2px dashed #9ca3af; /* gray-400 */
-            transition: all 0.3s ease;
-        }
-
-        #drop-zone:hover, .drop-zone-over {
-            border-color: #3b82f6; /* blue-500 */
-            background-color: #eff6ff; /* blue-50 */
-        }
-
-        #drop-zone svg {
-            width: 4rem; /* w-16 */
-            height: 4rem; /* h-16 */
-            margin-left: auto;
-            margin-right: auto;
-            color: #9CA3AF; /* text-gray-400 */
-        }
-
-        #drop-zone p {
-            margin-top: 1rem; /* mt-4 */
-            color: #6B7280; /* text-gray-500 */
-        }
-
-        #drop-zone p span {
-            font-weight: 500; /* font-medium */
-            color: #2563EB; /* text-blue-600 */
-        }
-
-        #drop-zone .file-type {
-            font-size: 0.875rem; /* text-sm */
-            color: #9CA3AF; /* text-gray-400 */
-            margin-top: 0.25rem; /* mt-1 */
-        }
-
-        #image-preview-container {
-            margin-top: 1.5rem; /* mt-6 */
-        }
-
-        #image-preview-container p {
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            color: #374151; /* text-gray-700 */
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
-
-        #image-preview {
-            width: 100%;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05); /* shadow-inner */
-            border: 1px solid #E5E7EB; /* border-gray-200 */
+        #generator { background-color: #F9FAFB; }
+        #generator .grid-container { 
+            max-width: 64rem; 
+            margin-left: auto; 
+            margin-right: auto; 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
         }
         
-        #remove-image {
-            margin-top: 0.75rem; /* mt-3 */
-            font-size: 0.875rem; /* text-sm */
-            color: #DC2626; /* text-red-600 */
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        
-        #remove-image:hover {
-            color: #991B1B; /* hover:text-red-800 */
-        }
+        /* Language Selector */
+        #language-selector { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
+        #language-selector label { font-size: 0.875rem; font-weight: 500; color: #374151; }
+        #language-select { width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #D1D5DB; background-color: #fff; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236B7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22M6%208l4%204%204-4%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25em; }
 
-        /* .output-area { */
-            /* max-height: 626px; */ /* Removed */
-            /* overflow-y: auto; */ /* Removed */
-            /* This card will now hold a scrolling container */
-        /* } */
+        #drop-zone { width: 100%; padding: 2.5rem; border-radius: 0.5rem; text-align: center; cursor: pointer; border: 2px dashed #9ca3af; transition: all 0.3s ease; }
+        #drop-zone:hover, .drop-zone-over { border-color: #3b82f6; background-color: #eff6ff; }
+        #drop-zone svg { width: 4rem; height: 4rem; margin-left: auto; margin-right: auto; color: #9CA3AF; }
+        #drop-zone p { margin-top: 1rem; color: #6B7280; }
+        #drop-zone p span { font-weight: 500; color: #2563EB; }
+        #drop-zone .file-type { font-size: 0.875rem; color: #9CA3AF; margin-top: 0.25rem; }
+        #image-preview-container { margin-top: 1.5rem; }
+        #image-preview-container p { font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem; }
+        #image-preview { width: 100%; border-radius: 0.5rem; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05); border: 1px solid #E5E7EB; }
+        #remove-image { margin-top: 0.75rem; font-size: 0.875rem; color: #DC2626; cursor: pointer; background: none; border: none; }
+        #remove-image:hover { color: #991B1B; }
+
+        .output-area { position: relative; }
         
-        /* --- NEW: Wrapper for scrollable output --- */
+        /* Scrollable content wrapper */
         #output-scroll-wrapper {
-            max-height: 450px; /* Set max height */
-            overflow-y: auto;  /* Add vertical scrollbar when needed */
-            position: relative; /* Needed for spinner positioning */
-            min-height: 300px; /* Ensure it has a minimum height */
-            padding-top: 1px; /* Small padding */
-            margin-top: -1px; /* Counteract padding */
-        }
-
-        .placeholder-or-loader {
-            text-align: center;
-            padding: 2.5rem 0; /* py-10 */
-            /* This will now be positioned relative to the scroll wrapper */
-        }
-
-        .spinner {
-            width: 3rem; /* w-12 */
-            height: 3rem; /* h-12 */
-            border-radius: 9999px; /* rounded-full */
-            border-width: 4px;
-            border-color: #E5E7EB; /* border-gray-200 */
-            border-top-color: #3b82f6; /* blue-500 */
-            margin-left: auto;
-            margin-right: auto;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .placeholder-or-loader p {
-            margin-top: 1rem; /* mt-4 */
-            color: #4B5563; /* text-gray-600 */
-        }
-
-        #output-placeholder svg {
-            width: 4rem; /* w-16 */
-            height: 4rem; /* h-16 */
-            margin: auto;
-            color: #D1D5DB; /* text-gray-300 */
-        }
-        
-        #output-placeholder p {
-            color: #9CA3AF; /* text-gray-400 */
-        }
-
-        #error-message {
-            padding: 1rem; /* p-4 */
-            border-radius: 0.5rem; /* rounded-lg */
-            background-color: #FEF2F2; /* bg-red-50 */
-            border: 1px solid #FEE2E2; /* border-red-200 */
-            color: #B91C1C; /* text-red-700 */
-        }
-        
-        #error-message p:first-child {
-            font-weight: 500; /* font-medium */
-        }
-
-        #error-message #error-text {
-            font-size: 0.875rem; /* text-sm */
-        }
-        
-        /* Styles for generated content */
-        #output-content {
-             /* max-height and overflow removed from here */
-            padding: 0.25rem; /* Add a little space */
-        }
-        #output-content h3 {
-             font-size: 1.25rem; /* text-xl */
-             font-weight: 600; /* font-semibold */
-             margin-top: 1rem; /* mt-4 */
-             margin-bottom: 0.5rem; /* mb-2 */
-             color: #111827;
-        }
-        #output-content h4 {
-             font-size: 1.125rem; /* text-lg */
-             font-weight: 600; /* font-semibold */
-             margin-top: 0.75rem; /* mt-3 */
-             margin-bottom: 0.25rem; /* mb-1 */
-             color: #111827;
-        }
-        #output-content ul {
-            list-style-type: disc;
-            list-style-position: outside;
-            padding-left: 1.25rem; /* pl-5 */
-            margin-bottom: 1rem; /* mb-4 */
-            display: grid;
-            gap: 0.25rem;
-        }
-        #output-content li {
-            padding-left: 0.25rem; /* ml-4 -> pl-5 on ul */
-            color: #374151; /* prose */
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* --- Chat Support Section --- */
-        #chat {
-            background-color: #ffffff;
-        }
-
-        .chat-form-container {
-            max-width: 48rem; /* max-w-3xl */
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #F9FAFB; /* bg-gray-50 */
-            padding: 2rem; /* p-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            border: 1px solid #F3F4F6; /* border-gray-100 */
-        }
-
-        #chat-form {
-            display: flex;
-            gap: 0.5rem; /* space-x-2 */
-        }
-
-        #chat-input {
-            flex-grow: 1; /* w-full */
-            padding: 0.75rem 1rem; /* px-4 py-3 */
-            border-radius: 0.5rem; /* rounded-lg */
-            border: 1px solid #D1D5DB; /* border-gray-300 */
-            outline: none;
-            font-size: 1rem;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        #chat-input:focus {
-            border-color: #3B82F6; /* focus:border-blue-500 */
-            box-shadow: 0 0 0 2px #BFDBFE; /* focus:ring-2 focus:ring-blue-200 */
-        }
-        
-        #chat-submit {
-            padding-left: 1.5rem; /* px-6 */
-            padding-right: 1.5rem; /* px-6 */
-            border-radius: 0.5rem; /* rounded-lg */
-        }
-        
-        #chat-submit-success {
-            margin-top: 1rem;
-            color: #166534; /* text-green-800 */
-            font-weight: 500;
-            text-align: center;
-        }
-
-
-        /* --- About Section --- */
-        #about {
-            background-color: #F9FAFB; /* bg-gray-50 */
-        }
-
-        #about .grid-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3rem; /* gap-12 */
-        }
-        
-        #about .text-content h2 {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-            color: #111827; /* text-gray-900 */
-        }
-        
-        #about .text-content p {
-            margin-top: 1.5rem; /* mt-6 */
-            font-size: 1.125rem; /* text-lg */
-            color: #4B5563; /* text-gray-600 */
-        }
-        
-        #about .text-content p + p {
-             margin-top: 1rem; /* mt-4 */
-             color: #4B5563; /* text-gray-600 */
-        }
-        
-        .image-placeholder-wrapper {
-            background-color: #ffffff;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-            border: 1px solid #E5E7EB; /* border-gray-200 */
-            padding: 2rem; /* p-8 */
-            width: 100%;
-        }
-
-        .image-placeholder {
-            padding-bottom: 56.25%; /* aspect-video */
+            max-height: 500px; /* Fixed max-height */
+            flex-grow: 1; 
+            min-height: 0; 
+            overflow-y: auto; /* Allow scrolling */
             position: relative;
-            background-color: #3B82F6; /* bg-blue-500 */
-            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1px; 
+            margin-top: 1.5rem; 
+            border-top: 1px solid #e5e7eb; 
+            padding-top: 1.5rem;
+        }
+        
+        /* Force grid columns to be equal height on desktop */
+        @media (min-width: 768px) {
+            #generator .grid-container { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 3rem; 
+                align-items: stretch; /* This makes both columns equal height */
+            }
+        }
+
+
+        .placeholder-or-loader { text-align: center; padding: 2.5rem 0; }
+        .spinner { width: 3rem; height: 3rem; border-radius: 9999px; border-width: 4px; border-color: #E5E7EB; border-top-color: #3b82f6; margin-left: auto; margin-right: auto; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .placeholder-or-loader p { margin-top: 1rem; color: #4B5563; }
+        #output-placeholder svg { width: 4rem; height: 4rem; margin: auto; color: #D1D5DB; }
+        #output-placeholder p { color: #9CA3AF; }
+
+        /* TTS Button */
+        #tts-button {
+            background-color: #EFF6FF; 
+            color: #2563EB; 
+            border: 1px solid #BFDBFE; 
+            border-radius: 9999px; 
+            width: 2.5rem; 
+            height: 2.5rem; 
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff; /* text-white */
-        }
-        
-        .image-placeholder svg {
-            width: 5rem; /* w-20 */
-            height: 5rem; /* h-20 */
-            opacity: 0.75;
+            cursor: pointer;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 1.25rem; 
+            right: 1.25rem;
+            transition: all 0.2s ease;
         }
+        #tts-button:hover { background-color: #DBEAFE; }
+        #tts-button.playing { background-color: #FEF2F2; color: #DC2626; border-color: #FECACA; }
         
-        .image-placeholder-wrapper p {
-            text-align: center;
-            margin-top: 1rem; /* mt-4 */
-            color: #6B7280; /* text-gray-500 */
-            font-style: italic;
-        }
+        #tts-button svg { width: 1.25rem; height: 1.25rem; }
+
+        #error-message { padding: 1rem; border-radius: 0.5rem; background-color: #FEF2F2; border: 1px solid #FEE2E2; color: #B91C1C; }
+        #error-message p:first-child { font-weight: 500; }
+        #error-message #error-text { font-size: 0.875rem; }
+        
+        #output-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #111827; }
+        #output-content h4 { font-size: 1.125rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #111827; }
+        #output-content ul { list-style-type: disc; list-style-position: outside; padding-left: 1.25rem; margin-bottom: 1rem; display: grid; gap: 0.25rem; }
+        #output-content li { padding-left: 0.25rem; color: #374151; }
+        .hidden { display: none !important; }
+
+        /* --- Chat Support Section --- */
+        #chat { background-color: #ffffff; }
+        .chat-form-container { max-width: 48rem; margin-left: auto; margin-right: auto; background-color: #F9FAFB; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); border: 1px solid #F3F4F6; }
+        #chat-form { display: flex; gap: 0.5rem; }
+        #chat-input { flex-grow: 1; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #D1D5DB; outline: none; font-size: 1rem; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+        #chat-input:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #BFDBFE; }
+        #chat-submit { padding-left: 1.5rem; padding-right: 1.5rem; border-radius: 0.5rem; }
+        #chat-submit-success { margin-top: 1rem; color: #166534; font-weight: 500; text-align: center; }
+
+        /* --- About Section --- */
+        #about { background-color: #F9FAFB; }
+        #about .grid-container { display: flex; flex-direction: column; align-items: center; gap: 3rem; }
+        #about .text-content h2 { font-size: 1.875rem; font-weight: 700; color: #111827; }
+        #about .text-content p { margin-top: 1.5rem; font-size: 1.125rem; color: #4B5563; }
+        #about .text-content p + p { margin-top: 1rem; color: #4B5563; }
+        .image-placeholder-wrapper { background-color: #ffffff; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); border: 1px solid #E5E7EB; padding: 2rem; width: 100%; }
+        .image-placeholder { padding-bottom: 56.25%; position: relative; background-color: #3B82F6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: #ffffff; }
+        .image-placeholder svg { width: 5rem; height: 5rem; opacity: 0.75; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .image-placeholder-wrapper p { text-align: center; margin-top: 1rem; color: #6B7280; font-style: italic; }
 
         /* --- Contact Section --- */
-        #contact {
-            background-color: #ffffff;
-        }
-        
-        .form-container {
-            max-width: 42rem; /* max-w-2xl */
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        #contact-success {
-            padding: 1rem; /* p-4 */
-            margin-bottom: 1.5rem; /* mb-6 */
-            border-radius: 0.5rem; /* rounded-lg */
-            background-color: #F0FDF4; /* bg-green-50 */
-            border: 1px solid #DCFCE7; /* border-green-200 */
-            color: #166534; /* text-green-800 */
-        }
-        
-        #contact-success p:first-child {
-            font-weight: 500; /* font-medium */
-        }
-
-        #contact-form {
-            background-color: #ffffff;
-            padding: 2rem; /* p-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-            border: 1px solid #F3F4F6; /* border-gray-100 */
-            display: grid;
-            gap: 1.5rem; /* space-y-6 */
-        }
-        
-        #contact-form label {
-            display: block;
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            color: #374151; /* text-gray-700 */
-            margin-bottom: 0.25rem; /* mb-1 */
-        }
-        
-        #contact-form input,
-        #contact-form textarea {
-            width: 100%;
-            padding: 0.75rem 1rem; /* px-4 py-3 */
-            border-radius: 0.5rem; /* rounded-lg */
-            border: 1px solid #D1D5DB; /* border-gray-300 */
-            outline: none;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-        }
-        
-        #contact-form input:focus,
-        #contact-form textarea:focus {
-            border-color: #3B82F6; /* focus:border-blue-500 */
-            box-shadow: 0 0 0 2px #BFDBFE; /* focus:ring-2 focus:ring-blue-200 */
-        }
-        
-        #contact-form button {
-            width: 100%;
-            border: none;
-            cursor: pointer;
-        }
+        #contact { background-color: #ffffff; }
+        .form-container { max-width: 42rem; margin-left: auto; margin-right: auto; }
+        #contact-success { padding: 1rem; margin-bottom: 1.5rem; border-radius: 0.5rem; background-color: #F0FDF4; border: 1px solid #DCFCE7; color: #166534; }
+        #contact-success p:first-child { font-weight: 500; }
+        #contact-form { background-color: #ffffff; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid #F3F4F6; display: grid; gap: 1.5rem; }
+        #contact-form label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
+        #contact-form input, #contact-form textarea { width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #D1D5DB; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+        #contact-form input:focus, #contact-form textarea:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #BFDBFE; }
+        #contact-form button { width: 100%; border: none; cursor: pointer; }
 
         /* --- Footer --- */
-        footer {
-            background-color: #1F2937; /* bg-gray-800 */
-            color: #9CA3AF; /* text-gray-400 */
-            padding-top: 3rem; /* py-12 */
-            padding-bottom: 3rem; /* py-12 */
-        }
-
-        footer .container {
-            text-align: center;
-        }
+        footer { background-color: #1F2937; color: #9CA3AF; padding-top: 3rem; padding-bottom: 3rem; }
+        footer .container { text-align: center; }
 
         /* --- Media Queries (Mobile-First) --- */
-
-        /* Small screens (sm: 640px) */
         @media (min-width: 640px) {
-            #home .button-group {
-                flex-direction: row;
-                row-gap: 0;
-                column-gap: 1rem; /* sm:space-x-4 */
-            }
+            #home .button-group { flex-direction: row; row-gap: 0; column-gap: 1rem; }
         }
-
-        /* Medium screens (md: 768px) */
         @media (min-width: 768px) {
-            .nav-links {
-                display: flex; /* md:flex */
-            }
-
-            #mobile-menu-btn {
-                display: none; /* md:hidden */
-            }
-
-            #home {
-                padding-top: 8rem; /* md:pt-32 */
-                padding-bottom: 9rem; /* md:pb-36 */
-            }
-
-            #home h1 {
-                font-size: 3.75rem; /* md:text-6xl */
-                line-height: 1;
-            }
-
-            #home .subtitle {
-                font-size: 1.25rem; /* md:text-xl */
-            }
-
-            section {
-                padding-top: 7rem; /* md:py-28 */
-                padding-bottom: 7rem; /* md:py-28 */
-            }
-
-            .section-header h2 {
-                font-size: 2.25rem; /* md:text-4xl */
-            }
-
-            #generator .grid-container {
-                grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
-                gap: 3rem; /* md:gap-12 */
-            }
-            
-            #about .grid-container {
-                flex-direction: row; /* md:flex-row */
-                gap: 4rem; /* md:gap-16 */
-            }
-            
-            #about .text-content,
-            #about .image-placeholder-wrapper {
-                width: 50%; /* md:w-1/2 */
-            }
-            
-            #about .text-content h2 {
-                font-size: 2.25rem; /* md:text-4xl */
-            }
-            
-            #contact-form {
-                padding: 2.5rem; /* md:p-10 */
-            }
+            .nav-links { display: flex; }
+            #mobile-menu-btn { display: none; }
+            #home { padding-top: 8rem; padding-bottom: 9rem; }
+            #home h1 { font-size: 3.75rem; line-height: 1; }
+            #home .subtitle { font-size: 1.25rem; }
+            section { padding-top: 7rem; padding-bottom: 7rem; }
+            .section-header h2 { font-size: 2.25rem; }
+            /* #generator .grid-container { grid-template-columns: repeat(2, 1fr); gap: 3rem; } */ /* ALREADY DEFINED */
+            #about .grid-container { flex-direction: row; gap: 4rem; }
+            #about .text-content, #about .image-placeholder-wrapper { width: 50%; }
+            #about .text-content h2 { font-size: 2.25rem; }
+            #contact-form { padding: 2.5rem; }
         }
-        
-        /* Large screens (lg: 1024px) */
-        @media (min-width: 1024px) {
-            /* No specific lg styles needed for the replaced section */
-        }
-        
-        
-
     </style>
 </head>
 <body>
@@ -691,11 +224,7 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#home" class="logo">
-                Device<span class="text-blue-600">DigiHelp</span>
-            </a>
-            
-            <!-- Desktop Nav -->
+            <a href="#home" class="logo">Device<span>DigiHelp</span></a>
             <div class="nav-links">
                 <a href="#home" class="nav-link" data-section="home">Home</a>
                 <a href="#generator" class="nav-link" data-section="generator">AI Generator</a>
@@ -703,16 +232,10 @@
                 <a href="#about" class="nav-link" data-section="about">About</a>
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
-
-            <!-- Mobile Nav Button -->
             <button id="mobile-menu-btn" aria-label="Open mobile menu">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-
-        <!-- Mobile Nav Menu -->
         <div id="mobile-menu">
             <a href="#home" class="nav-link" data-section="home">Home</a>
             <a href="#generator" class="nav-link" data-section="generator">AI Generator</a>
@@ -724,23 +247,14 @@
 
     <!-- Main Content -->
     <main>
-
         <!-- Hero Section -->
         <section id="home">
             <div class="container">
-                <h1>
-                    Instant Manuals, Expert Help
-                </h1>
-                <p class="subtitle">
-                    Confused by a device? Upload its photo to our AI for an instant manual, or connect with our experts for personalized support.
-                </p>
+                <h1>Instant Manuals, Expert Help</h1>
+                <p class="subtitle">Confused by a device? Upload its photo to our AI for an instant manual, or connect with our experts for personalized support.</p>
                 <div class="button-group">
-                    <a href="#generator" class="btn btn-primary">
-                        Try the AI Generator
-                    </a>
-                    <a href="#chat" class="btn btn-secondary">
-                        Chat with an Expert
-                    </a>
+                    <a href="#generator" class="btn btn-primary">Try the AI Generator</a>
+                    <a href="#chat" class="btn btn-secondary">Chat with an Expert</a>
                 </div>
             </div>
         </section>
@@ -750,59 +264,71 @@
             <div class="container">
                 <div class="section-header">
                     <h2>AI Instant Device Manuals</h2>
-                    <p>
-                        Don't search for manuals. Upload a picture of any device, and our AI will identify it and generate a "how-to" guide for you.
-                    </p>
+                    <p>Don't search for manuals. Upload a picture of any device, and our AI will identify it and generate a "how-to" guide for you.</p>
                 </div>
-
                 <div class="grid-container">
-                    
                     <!-- Upload Area -->
                     <div class="card">
                         <h3>1. Upload Your Image</h3>
-                        
                         <div id="drop-zone">
                             <input type="file" id="file-input" class="hidden" accept="image/*">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <p>
-                                <span>Click to upload</span> or drag and drop
-                            </p>
+                            <p><span>Click to upload</span> or drag and drop</p>
                             <p class="file-type">PNG, JPG, or GIF</p>
                         </div>
-
-                        <!-- Image Preview -->
                         <div id="image-preview-container" class="hidden">
                             <p>Your Image:</p>
                             <img id="image-preview" src="" alt="Image Preview">
                             <button id="remove-image">&times; Remove Image</button>
                         </div>
+                        
+                        <!-- Language Selector -->
+                        <div id="language-selector">
+                            <label for="language-select">Select Language:</label>
+                            <select id="language-select">
+                                <option value="English" data-lang="en-US" selected>English (US)</option>
+                                <option value="Spanish" data-lang="es-ES">Español (España)</option>
+                                <option value="French" data-lang="fr-FR">Français (France)</option>
+                                <option value="German" data-lang="de-DE">Deutsch (Deutschland)</option>
+                                <option value="Hindi" data-lang="hi-IN">हिन्दी (भारत)</option>
+                                <!-- REMOVED Kannada -->
+                                <option value="Japanese" data-lang="ja-JP">日本語 (日本)</option>
+                                <option value="Korean" data-lang="ko-KR">한국어 (대한민국)</option>
+                                <option value="Portuguese" data-lang="pt-BR">Português (Brasil)</option>
+                                <option value="Russian" data-lang="ru-RU">Русский (Россия)</option>
+                                <option value="Chinese (Mandarin)" data-lang="zh-CN">中文 (简体)</option>
+                            </select>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button id="generate-btn" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" disabled>
+                            Generate Manual
+                        </button>
                     </div>
 
                     <!-- Output Area -->
-                    <div class="card output-area" id="output-scroll"> <!-- Your ID was here, this is fine -->
+                    <div class="card output-area">
                         <h3>2. Get Your Manual</h3>
                         
-                        <!-- FIXED: Wrapper for scrollable content -->
+                        <!-- TTS Button -->
+                        <button id="tts-button" class="hidden" aria-label="Listen to manual">
+                            <svg id="tts-icon-play" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M17.657 6.343a9 9 0 010 12.728M9 19V5l7 7-7 7z"></path></svg>
+                            <svg id="tts-icon-stop" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+
                         <div id="output-scroll-wrapper">
-                            <!-- Loading Spinner -->
                             <div id="loading-spinner" class="placeholder-or-loader hidden">
                                 <div class="spinner"></div>
                                 <p>Analyzing your device... Please wait.</p>
                             </div>
-
-                            <!-- Error Message -->
                             <div id="error-message" class="hidden">
                                 <p>Oops! Something went wrong.</p>
                                 <p id="error-text">Could not generate the manual. Please try again.</p>
                             </div>
-
-                            <!-- Placeholder -->
                             <div id="output-placeholder" class="placeholder-or-loader">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 <p>Your generated manual will appear here.</p>
                             </div>
-
-                            <!-- Generated Output -->
                             <div id="output-content" class="hidden">
                                 <!-- Content will be injected by JavaScript -->
                             </div>
@@ -817,19 +343,14 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Need More Help? Chat with an Expert</h2>
-                    <p>
-                        Get instant answers from our tech support team for any follow-up questions you have.
-                    </p>
+                    <p>Get instant answers from our tech support team for any follow-up questions you have.</p>
                 </div>
-
                 <div class="chat-form-container">
                     <form id="chat-form">
                         <input type="text" id="chat-input" placeholder="Type your question here..." required>
                         <button type="submit" id="chat-submit" class="btn btn-primary">Send</button>
                     </form>
-                    <p id="chat-submit-success" class="hidden">
-                        Message sent! An expert will be with you shortly.
-                    </p>
+                    <p id="chat-submit-success" class="hidden">Message sent! An expert will be with you shortly.</p>
                 </div>
             </div>
         </section>
@@ -837,26 +358,17 @@
         <!-- About Section -->
         <section id="about">
             <div class="container grid-container">
-                
-                <!-- About Text -->
                 <div class="text-content">
                     <h2>About DeviceDigiHelp</h2>
-                    <p>
-                        We believe technology should be easy for everyone. DeviceDigiHelp started with a simple idea: what if you could just point at a device and know how to use it?
-                    </p>
-                    <p>
-                        Using powerful AI, we've made that a reality. But we're more than just software. We're a team of patient tech experts, and problem-solvers dedicated to ending tech frustration. Whether you use our instant AI generator or chat with our team, we're here to help you feel confident with your devices.
-                    </p> <!-- FIXED: Removed </I p> typo -->
+                    <p>We believe technology should be easy for everyone. DeviceDigiHelp started with a simple idea: what if you could just point at a device and know how to use it?</p>
+                    <p>Using powerful AI, we've made that a reality. But we're more than just software. We're a team of patient tech experts, and problem-solvers dedicated to ending tech frustration. Whether you use our instant AI generator or chat with our team, we're here to help you feel confident with your devices.</p>
                 </div>
-
-                <!-- About Image Placeholder -->
                 <div class="image-placeholder-wrapper">
                     <div class="image-placeholder">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
                     <p>Our team and AI, working to help you.</p>
                 </div>
-
             </div>
         </section>
 
@@ -865,19 +377,13 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Get in Touch</h2>
-                    <p>
-                        Have questions about our services or need help with a device? Send us a message!
-                    </p>
+                    <p>Have questions about our services or need help with a device? Send us a message!</p>
                 </div>
-
                 <div class="form-container">
-                    <!-- Contact Form Success Message -->
                     <div id="contact-success" class="hidden">
                         <p>Thank you!</p>
                         <p>Your message has been sent. We'll get back to you soon.</p>
                     </div>
-
-                    <!-- Contact Form -->
                     <form id="contact-form">
                         <div>
                             <label for="name">Name</label>
@@ -892,9 +398,7 @@
                             <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">
-                                Send Message
-                            </button>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -910,14 +414,19 @@
     </footer>
 
     <!-- 
-      UPDATED SCRIPT:
-      - Fixed JS comments (# -> //)
-      - Added backend calls for Chat and Contact forms
+    ============================================================
+    UPDATED JAVASCRIPT
+    ============================================================
     -->
     <script type="module">
-        // --- Helper: Backend URL ---
+        // --- Backend URL ---
+        // Change '127.0.0.1' to your computer's IP if testing on your phone
         const backendBaseUrl = "http://127.0.0.1:8000";
-        
+        const manualBackendUrl = `${backendBaseUrl}/generate-manual/`;
+        const chatBackendUrl = `${backendBaseUrl}/chat-submit/`;
+        const contactBackendUrl = `${backendBaseUrl}/contact-submit/`;
+        // REMOVED: ttsBackendUrl
+
         // --- Mobile Menu Toggle ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -925,30 +434,23 @@
             const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
             mobileMenu.style.display = isHidden ? 'block' : 'none';
         });
-
-        // Close mobile menu when a link is clicked
         mobileMenu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
-                mobileMenu.style.display = 'none';
-            }
+            if (e.target.tagName === 'A') mobileMenu.style.display = 'none';
         });
 
         // --- Active Nav Link Highlighting ---
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
-
         function updateActiveLink() {
-            let currentSection = 'home'; // Default to home
+            let currentSection = 'home';
             const scrollY = window.pageYOffset;
-
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100; // 100px offset
+                const sectionTop = section.offsetTop - 100;
                 const sectionHeight = section.offsetHeight;
                 if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                     currentSection = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
                 link.classList.remove('nav-link-active');
                 if (link.dataset.section === currentSection) {
@@ -957,94 +459,68 @@
             });
         }
         window.addEventListener('scroll', updateActiveLink);
-        updateActiveLink(); // Initial check on load
+        updateActiveLink();
 
-        // --- Chat Form (UPDATED) ---
+        // --- Helper: Show/Hide Error on Forms ---
+        function showFormSuccess(successElement) {
+            successElement.classList.remove('hidden');
+            setTimeout(() => successElement.classList.add('hidden'), 4000);
+        }
+        function showFormError(inputElement, error) {
+            console.error(error);
+            inputElement.style.border = '1px solid #DC2626'; // Red border
+            setTimeout(() => inputElement.style.border = '', 3000);
+        }
+
+        // --- Chat Form ---
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
         const chatSuccess = document.getElementById('chat-submit-success');
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const message = chatInput.value;
-            
-            // Disable form
-            chatInput.disabled = true;
-            chatForm.querySelector('button').disabled = true;
-            
             try {
-                const response = await fetch(`${backendBaseUrl}/chat-submit/`, {
+                const response = await fetch(chatBackendUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message: message }),
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
                 });
-
                 if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.detail || 'Failed to send chat message.');
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Chat submission failed');
                 }
-
-                console.log("Chat Message Sent:", message); // Log success
-                chatInput.value = ''; // Clear input
-                
-                // Show success message
-                chatSuccess.classList.remove('hidden');
-                setTimeout(() => chatSuccess.classList.add('hidden'), 4000);
-
+                chatInput.value = '';
+                showFormSuccess(chatSuccess);
             } catch (error) {
-                console.error("Chat form error:", error.message);
-                // In a real app, you'd show a proper error UI, not alert
-                alert(`Error: ${error.message}`); 
-            } finally {
-                // Re-enable form
-                chatInput.disabled = false;
-                chatForm.querySelector('button').disabled = false;
+                showFormError(chatInput, error);
             }
         });
 
-        // --- Contact Form (UPDATED) ---
+        // --- Contact Form ---
         const contactForm = document.getElementById('contact-form');
         const contactSuccess = document.getElementById('contact-success');
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message'),
-            };
-
-            // Disable form elements
-            contactForm.querySelector('button').disabled = true;
+            const data = Object.fromEntries(formData.entries());
 
             try {
-                const response = await fetch(`${backendBaseUrl}/contact-submit/`, {
+                const response = await fetch(contactBackendUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
                 });
-
                 if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.detail || 'Failed to send contact form.');
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Contact form submission failed');
                 }
-
-                // Show success message
                 contactForm.reset();
                 contactSuccess.classList.remove('hidden');
                 setTimeout(() => contactSuccess.classList.add('hidden'), 5000);
-
             } catch (error) {
-                console.error("Contact form error:", error.message);
-                // In a real app, you'd show a proper error UI, not alert
-                alert(`Error: ${error.message}`);
-            } finally {
-                // Re-enable form
-                contactForm.querySelector('button').disabled = false;
+                console.error(error);
+                // Use a non-blocking error message
+                showError("Could not submit contact form. Please try again.");
             }
         });
 
@@ -1054,50 +530,44 @@
         const imagePreviewContainer = document.getElementById('image-preview-container');
         const imagePreview = document.getElementById('image-preview');
         const removeImageBtn = document.getElementById('remove-image');
+        const languageSelect = document.getElementById('language-select');
+        const generateBtn = document.getElementById('generate-btn'); 
         
+        const outputScrollWrapper = document.getElementById('output-scroll-wrapper');
         const loadingSpinner = document.getElementById('loading-spinner');
         const errorMessage = document.getElementById('error-message');
         const errorText = document.getElementById('error-text');
         const outputPlaceholder = document.getElementById('output-placeholder');
         const outputContent = document.getElementById('output-content');
         
-        let file = null;
-
-        // Handle file selection
-        fileInput.addEventListener('change', (e) => {
-            handleFile(e.target.files[0]);
-        });
-
-        // Handle drag and drop
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('drop-zone-over');
-        });
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('drop-zone-over');
-        });
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('drop-zone-over');
-            handleFile(e.dataTransfer.files[0]);
-        });
+        const ttsButton = document.getElementById('tts-button');
+        const ttsIconPlay = document.getElementById('tts-icon-play');
+        const ttsIconStop = document.getElementById('tts-icon-stop');
         
-        // Trigger file input click
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
-        });
+        let file = null;
+        let lastGeneratedText = ""; // Store text for TTS
+        
+        // REVERTED: Using browser's built-in synth
+        const synth = window.speechSynthesis;
+        let utterance = null;
+        
+        // --- File Handling ---
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drop-zone-over'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drop-zone-over'));
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drop-zone-over'); handleFile(e.dataTransfer.files[0]); });
+        dropZone.addEventListener('click', () => fileInput.click());
 
-        // Remove image
         removeImageBtn.addEventListener('click', () => {
             file = null;
-            fileInput.value = ''; // Clear the file input
+            fileInput.value = '';
             imagePreview.src = '';
             imagePreviewContainer.classList.add('hidden');
             dropZone.classList.remove('hidden');
             resetOutput();
+            generateBtn.disabled = true; 
         });
 
-        // Main file handling function
         function handleFile(selectedFile) {
             if (selectedFile && selectedFile.type.startsWith('image/')) {
                 file = selectedFile;
@@ -1107,34 +577,32 @@
                     imagePreviewContainer.classList.remove('hidden');
                     dropZone.classList.add('hidden');
                     resetOutput();
-                    // Automatically trigger generation
-                    generateManual(); 
+                    generateBtn.disabled = false; 
                 };
                 reader.readAsDataURL(file);
             } else {
-                console.warn("Please select a valid image file (PNG, JPG, GIF).");
-                // Avoid using alert()
                 showError("Please select a valid image file (PNG, JPG, GIF).");
             }
         }
+        
+        generateBtn.addEventListener('click', generateManual);
 
-        // Reset output state
+        // --- Output State Management ---
         function resetOutput() {
+            stopSpeech(); 
             loadingSpinner.classList.add('hidden');
             errorMessage.classList.add('hidden');
             outputContent.classList.add('hidden');
+            ttsButton.classList.add('hidden');
             outputPlaceholder.classList.remove('hidden');
             outputContent.innerHTML = '';
+            lastGeneratedText = "";
         }
-        
-        // Show loading state
         function showLoading() {
             resetOutput();
             outputPlaceholder.classList.add('hidden');
             loadingSpinner.classList.remove('hidden');
         }
-
-        // Show error state
         function showError(message) {
             resetOutput();
             outputPlaceholder.classList.add('hidden');
@@ -1142,97 +610,166 @@
             errorMessage.classList.remove('hidden');
         }
 
-        // Show final content
-        function showContent(htmlContent) {
+        // *** UPDATED showContent function ***
+        function showContent(rawText) {
             resetOutput();
             outputPlaceholder.classList.add('hidden');
-            // Basic formatting for Markdown-like text
-            const formattedContent = htmlContent
+
+            // --- FIX FOR AUDIO ---
+            // 1. Create a "clean" version for the audio by stripping all HTML/Markdown
+            let cleanText = rawText
+                .replace(/<[^>]+>/g, ' ')       // Remove all HTML tags
+                .replace(/## (.*)/g, '$1.')      // Replace ## Header with "Header."
+                .replace(/### (.*)/g, '$1.')     // Replace ### Header with "Header."
+                .replace(/\* (.*)/g, '$1.')      // Replace * Item with "Item."
+                .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bolding asterisks
+                .replace(/\n/g, ' ')           // Replace newlines with spaces
+                .replace(/\s+/g, ' ')          // Collapse multiple spaces
+                .trim();
+
+            // --- FIX FOR VISUALS ---
+            // 2. Format the HTML version for display
+            // Convert any remaining markdown to HTML
+            let formattedContent = rawText
+                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // Convert **bold** to <b>bold</b>
                 .replace(/## (.*)/g, '<h3>$1</h3>')
-                .replace(/### (.*)/g, '<h4>$1</h4>')
+                .replace(/### (.*)/g, '<h4>$1</h4>') 
                 .replace(/\* (.*)/g, '<li>$1</li>')
                 .replace(/(\<li>.*<\/li>)/gs, '<ul>$1</ul>')
                 .replace(/\n/g, '<br>')
                 .replace(/<br><br>/g, '<br>')
                 .replace(/<\/ul><br>/g, '</ul>');
             
-            outputContent.innerHTML = formattedContent;
+            // Check if the AI sent HTML or Markdown
+            // If it's already HTML (contains <b>), just use it.
+            if (rawText.includes("<b>") || rawText.includes("<h3>") || rawText.includes("<ul>")) {
+                 outputContent.innerHTML = rawText;
+            } else {
+                // Otherwise, use the Markdown-converted version
+                outputContent.innerHTML = formattedContent;
+            }
+            
             outputContent.classList.remove('hidden');
+            ttsButton.classList.remove('hidden');
+            
+            // 3. Save the *clean* text for the TTS
+            lastGeneratedText = cleanText; 
         }
 
-        // Call your new Python Backend
+        // --- Text-to-Speech (TTS) Logic ---
+        ttsButton.addEventListener('click', () => {
+            if (synth.speaking) {
+                stopSpeech();
+            } else {
+                startSpeech();
+            }
+        });
+
+        // REVERTED to browser-based speech
+        function startSpeech() {
+            if (!lastGeneratedText) return;
+
+            // Get the language code (e.g., "en-US") from the selected option
+            const selectedOption = languageSelect.options[languageSelect.selectedIndex];
+            const langCode = selectedOption.dataset.lang;
+
+            utterance = new SpeechSynthesisUtterance(lastGeneratedText);
+            utterance.lang = langCode || 'en-US'; // Default to en-US
+            
+            // Find a matching voice (optional, but improves quality)
+            const voices = synth.getVoices();
+            let voice = voices.find(v => v.lang === utterance.lang);
+            // Fallback: check for language prefix (e.g., "en" matches "en-GB")
+            if (!voice) {
+                voice = voices.find(v => v.lang.startsWith(utterance.lang.split('-')[0]));
+            }
+            if (voice) {
+                utterance.voice = voice;
+            }
+
+            utterance.onend = () => {
+                ttsButton.classList.remove('playing');
+                ttsIconPlay.classList.remove('hidden');
+                ttsIconStop.classList.add('hidden');
+            };
+
+            synth.speak(utterance);
+            ttsButton.classList.add('playing');
+            ttsIconPlay.classList.add('hidden');
+            ttsIconStop.classList.remove('hidden');
+        }
+
+        function stopSpeech() {
+            if (synth.speaking) {
+                synth.cancel(); // Stops speech
+            }
+            ttsButton.classList.remove('playing');
+            ttsIconPlay.classList.remove('hidden');
+            ttsIconStop.classList.add('hidden');
+            // Show play icon when stopped
+            ttsIconPlay.classList.remove('hidden');
+        }
+        
+        // Load voices on init
+        synth.getVoices();
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = synth.getVoices;
+        }
+
+        // --- Call Backend ---
         async function generateManual() {
             if (!file) {
                 showError("Please upload an image first.");
                 return;
             }
-
             showLoading();
 
             try {
-                // --- NEW BACKEND CALL ---
-                
-                // 1. Create FormData to send the file
                 const formData = new FormData();
-                formData.append("file", file); // "file" must match the name in main.py
+                formData.append("file", file);
+                formData.append("language", languageSelect.value); // Add selected language
 
-                // 2. Define the backend URL
-                const backendUrl = `${backendBaseUrl}/generate-manual/`;
-
-                // 3. Fetch from your backend
                 let response;
                 let retries = 3;
                 let delay = 1000;
 
                 while (retries > 0) {
                     try {
-                        response = await fetch(backendUrl, {
+                        response = await fetch(manualBackendUrl, {
                             method: 'POST',
                             body: formData,
-                            // Note: Do NOT set Content-Type header when using FormData
-                            // The browser will set it correctly (with the boundary)
                         });
-
-                        if (response.ok) {
-                            break; // Success
-                        } else if (response.status === 429) { // Throttling
-                            throw new Error('Rate limited by backend');
-                        } else {
-                            // Try to get a specific error message from the backend
-                            const errorData = await response.json();
-                            const detail = errorData.detail || `HTTP error! status: ${response.status}`;
-                            throw new Error(detail);
-                        }
+                        if (response.ok) break;
+                        if (response.status === 429) throw new Error('Rate limited');
+                        
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                        
                     } catch (error) {
                         if (error.message.includes('Rate limited') && retries > 1) {
                             retries--;
                             await new Promise(resolve => setTimeout(resolve, delay));
-                            delay *= 2; // Exponential backoff
+                            delay *= 2;
                         } else {
-                            throw error; // Rethrow other errors
+                            throw error;
                         }
                     }
                 }
 
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch from backend after retries. Status: ${response.status}`);
+                    throw new Error(`Failed to fetch from backend. Status: ${response.status}`);
                 }
 
-                // 4. Get the JSON response
                 const result = await response.json();
                 
-                // 5. Display the manual text (FIXED: # -> //)
                 if (result.manual_text) {
-                    // The backend returns the text, show it (FIXED: # -> //)
+                    // Show content and pass raw text for TTS
                     showContent(result.manual_text);
                 } else {
-                    console.error("Invalid response structure:", result);
                     showError("Received an empty or invalid response from the backend.");
                 }
-
             } catch (error) {
                 console.error('Error calling backend:', error);
-                // Handle network errors (e.g., backend is not running) (FIXED: # -> //)
                 if (error.message.includes('Failed to fetch')) {
                     showError("Could not connect to the backend. Is it running?");
                 } else {
@@ -1241,7 +778,6 @@
             }
         }
     </script>
-
 </body>
 </html>
 
