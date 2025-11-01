@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+python-multipart
+fastapi-cors
+pillow
+google-generativeai
