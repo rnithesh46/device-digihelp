@@ -9,12 +9,14 @@ from pydantic import BaseModel, EmailStr
 import smtplib
 import ssl
 from email.message import EmailMessage
-from email.message import EmailMessage
 from dotenv import load_dotenv
+from typing import Optional # Import Optional
 
-load_dotenv()
+# Load environment variables from .env file
+load_dotenv() 
 
 # 1. Load Environment Variables
+# These are now loaded from your .env file
 API_KEY = os.getenv("GEMINI_API_KEY")
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_APP_PASSWORD = os.getenv("SENDER_APP_PASSWORD")
@@ -22,29 +24,26 @@ YOUR_NAME = "DeviceDigiHelp Support"
 
 # 2. Validate Environment Variables
 if not API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable not set.")
+    raise ValueError("GEMINI_API_KEY environment variable not set. Please set it in your backend/.env file.")
 if not SENDER_EMAIL:
-    raise ValueError("SENDER_EMAIL environment variable not set (your Gmail address).")
+    raise ValueError("SENDER_EMAIL environment variable not set (your Gmail address). Please set it in your backend/.env file.")
 if not SENDER_APP_PASSWORD:
-    raise ValueError("SENDER_APP_PASSWORD environment variable not set (your 16-character App Password).")
+    raise ValueError("SENDER_APP_PASSWORD environment variable not set (your 16-character App Password). Please set it in your backend/.env file.")
 
 # 3. Configure Gemini
 genai.configure(api_key=API_KEY)
 
-# *** NEW: Upgraded Manual Prompt (from Image) ***
-MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are a professional technical writer and device expert. A user has uploaded an image of a device.
+# *** UPDATED Manual Prompt (from Image) ***
+MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are an expert tech assistant. A user has uploaded an image of a device.
 You MUST generate your entire response in the following language: {language}.
 Your response must be formatted in simple HTML.
 
-Your task is to generate a comprehensive, accurate, and easy-to-understand step-by-step guide for a beginner.
-
-1.  **Device Identification:** Start with a single line identifying the device. (e.g., "<b>This appears to be an Apple iPhone 15 Pro.</b>").
+1.  **Device Identification:** Start with a single line identifying the device. **Only bold the device name itself**. (e.g., "This appears to be an <b>Apple iPhone 14 Pro</b>.").
 2.  **Quick Start Guide:**
-    * Provide a clear, step-by-step 'Quick Start Guide'.
-    * This guide MUST be comprehensive and cover:
-        * **Setup:** How to turn it on, initial setup steps.
-        * **Core Functions:** The main 3-5 things a user would want to do (e.g., for a phone: make a call, take a photo; for a printer: connect to Wi-Fi, print a document; for a microwave: set time, use 'quick start').
-        * **Basic Maintenance:** One or two key tips (e.g., how to clean the filter, how to check battery health).
+    * Provide a clear, step-by-step 'Quick Start Guide' with the most essential, basic functions.
+    * Focus on what a brand new user would need to know (e.g., How to turn on/off, main controls, core function).
+    * Be easily understandable and to the point.
+    * This should be a detailed list, including as many basic steps as needed.
 3.  **Further Assistance:**
     * After the guide, add a 'Further Assistance' section.
     * Provide a list of 2-3 common follow-up questions.
@@ -57,20 +56,19 @@ RULES FOR FORMATTING:
 - Do NOT use any markdown characters like '##', '###', '*', or '**'.
 """
 
-# *** NEW: Upgraded Manual Prompt (from Text) ***
-TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are a professional technical writer and device expert. A user has provided a device name.
+# *** UPDATED Manual Prompt (from Text) ***
+TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are an expert tech assistant. A user has provided a device name.
 You MUST generate your entire response in the following language: {language}.
 Your response must be formatted in simple HTML.
 
 Your task is to generate a comprehensive, accurate, and easy-to-understand step-by-step guide for a beginner, based on the user's query.
 
-1.  **Device Identification:** Start with a single line confirming the device. (e.g., "<b>Here is the guide for the Apple iPhone 15 Pro.</b>").
+1.  **Device Identification:** Start with a single line confirming the device. **Only bold the device name itself**. (e.g., "Here is the guide for the <b>Apple iPhone 14 Pro</b>.").
 2.  **Quick Start Guide:**
-    * Provide a clear, step-by-step 'Quick Start Guide'.
-    * This guide MUST be comprehensive and cover:
-        * **Setup:** How to turn it on, initial setup steps.
-        * **Core Functions:** The main 3-5 things a user would want to do (e.g., for a phone: make a call, take a photo; for a printer: connect to Wi-Fi, print a document; for a microwave: set time, use 'quick start').
-        * **Basic Maintenance:** One or two key tips (e.g., how to clean the filter, how to check battery health).
+    * Provide a clear, step-by-step 'Quick Start Guide' with the most essential, basic functions.
+    * Focus on what a brand new user would need to know (e.g., How to turn on/off, main controls, core function).
+    * Be easily understandable and to the point.
+    * This should be a detailed list, including as many basic steps as needed.
 3.  **Further Assistance:**
     * After the guide, add a 'Further Assistance' section.
     * Provide a list of 2-3 common follow-up questions.
@@ -83,19 +81,17 @@ RULES FOR FORMATTING:
 - Do NOT use any markdown characters like '##', '###', '*', or '**'.
 """
 
-# *** NEW: Upgraded Chatbot Prompt ***
-CHAT_SYSTEM_PROMPT = """You are a Device-Specific Expert. You are acting as a chatbot.
+# *** UPDATED Chatbot Prompt (Multimodal) ***
+CHAT_SYSTEM_PROMPT_TEMPLATE = """You are a helpful, expert tech assistant. You are acting as a chatbot.
 The user has already identified a device, which will be provided as 'Device Context'.
+You MUST generate your entire response in the following language: {language}.
 Your job is to answer the user's follow-up questions with detailed, accurate, and step-by-step instructions.
-You must be able to answer any question, from simple to complex. For example:
-- "How do I add a fingerprint?"
-- "How much detergent do I put in this washing machine?"
-- "How do I print multiple copies?"
-- "How to set the temperature in this fridge?"
-- "Why is my laptop fan so loud?"
 
-Understand and answer questions about all digital, home, and kitchen appliances.
-Provide clear, concise, and helpful answers. Format your response with simple HTML (<b>, <ul>, <li>) for clarity.
+- If the user provides an image with their question, use it as additional context (e.g., if they ask 'what is this button?' and provide an image, you must identify the button in the image).
+- If no image is provided, just answer the text question.
+- You must be able to answer any question, from simple to complex (e.g., "How do I add a fingerprint?", "How much detergent do I put in this washing machine?", "How do I print multiple copies?").
+- Provide clear, concise, and helpful answers.
+- Format your response with simple HTML (<b>, <ul>, <li>) for clarity.
 """
 
 try:
@@ -106,14 +102,8 @@ try:
         top_k=1,
         max_output_tokens=8192,
     )
-    # Create a dedicated model for the chatbot
-    chat_model = genai.GenerativeModel(
-        model_name="gemini-2.5-flash-preview-09-2025",
-        system_instruction=CHAT_SYSTEM_PROMPT
-    )
 except Exception as e:
-    print(f"Error configuring generative model: {e}")
-    chat_model = None
+    print(f"Error configuring generation: {e}")
 
 # 4. Set up the FastAPI App
 app = FastAPI(title="Device DigiHelp API")
@@ -131,14 +121,13 @@ app.add_middleware(
 class ContactForm(BaseModel):
     name: str
     email: EmailStr
+    message: str
 
-class FollowUpRequest(BaseModel):
-    device: str
-    question: str
-
-class TextManualRequest(BaseModel): # NEW
+class TextManualRequest(BaseModel):
     query: str
     language: str
+
+# Note: We no longer use a Pydantic model for the chat, as it now uses FormData
 
 # --- Helper Function for Sending Email ---
 
@@ -213,7 +202,7 @@ async def generate_manual(
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
-# --- NEW: Generate Manual from Text Endpoint ---
+# --- Generate Manual from Text Endpoint ---
 @app.post("/generate-manual-from-text/")
 async def generate_manual_from_text(request: TextManualRequest):
     try:
@@ -251,18 +240,44 @@ async def generate_manual_from_text(request: TextManualRequest):
         raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
 
-# --- AI Chatbot Endpoint ---
+# --- AI Chatbot Endpoint (NOW MULTIMODAL) ---
 @app.post("/ask-follow-up/")
-async def ask_follow_up(request: FollowUpRequest):
-    if not chat_model:
-        raise HTTPException(status_code=500, detail="Chat model is not initialized.")
+async def ask_follow_up(
+    device: str = Form(...),
+    question: str = Form(...),
+    language: str = Form("English"),
+    file: Optional[UploadFile] = File(None) # Optional image file
+):
     
     try:
-        # We send the context (device) and the question to the model
-        # The system prompt (CHAT_SYSTEM_PROMPT) tells it how to use them
-        prompt = f"Device Context: {request.device}\n\nUser Question: {request.question}"
+        # Create the dynamic system prompt for the chat
+        dynamic_chat_prompt = CHAT_SYSTEM_PROMPT_TEMPLATE.format(language=language)
         
-        response = chat_model.generate_content(prompt)
+        # Initialize the chat model with the new prompt
+        chat_model = genai.GenerativeModel(
+            model_name="gemini-2.5-flash-preview-09-2025",
+            system_instruction=dynamic_chat_prompt
+        )
+
+        # Build the prompt list
+        prompt_parts = []
+        prompt_parts.append(f"Device Context: {device}")
+        
+        # Add the image if it exists
+        if file:
+            if not file.content_type.startswith("image/"):
+                raise HTTPException(status_code=400, detail="Invalid file type for chat. Please upload an image.")
+            
+            image_bytes = await file.read()
+            img = Image.open(io.BytesIO(image_bytes))
+            prompt_parts.append("Here is an image related to my question:")
+            prompt_parts.append(img)
+        
+        # Add the user's text question
+        prompt_parts.append(f"User Question: {question}")
+        
+        # Send all parts to the model
+        response = chat_model.generate_content(prompt_parts)
         
         if response and response.text:
             return {"answer": response.text}

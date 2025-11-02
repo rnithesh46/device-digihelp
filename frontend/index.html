@@ -514,6 +514,13 @@
             max-width: 80%;
             line-height: 1.6;
         }
+        /* NEW: Chat message image */
+        .chat-message img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
         
         .chat-user {
             background: linear-gradient(to right, #2563EB, #3B82F6);
@@ -540,11 +547,79 @@
             padding: 1rem;
             border-top: 1px solid #E5E7EB;
             background-color: #ffffff;
+            position: relative;
         }
+        
+        /* NEW: Chat Attachment Preview */
+        #chat-preview-container {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: #F3F4F6;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #chat-preview-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.25rem;
+            object-fit: cover;
+        }
+        #chat-preview-container span {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-left: 0.5rem;
+            flex-grow: 1;
+        }
+        #chat-remove-preview {
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
         #chat-form { 
             display: flex; 
             gap: 0.5rem; 
+            align-items: center;
         }
+        
+        /* NEW: Chat Icon Buttons */
+        .chat-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6B7280;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .chat-icon-btn:hover {
+            background-color: #F3F4F6;
+            color: #111827;
+        }
+        .chat-icon-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        /* NEW: Mic listening state */
+        #mic-btn.is-listening {
+            color: #EF4444; /* red-500 */
+            background-color: #FEF2F2; /* red-50 */
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         #chat-input { 
             flex-grow: 1; 
             padding: 0.75rem 1rem; 
@@ -900,98 +975,98 @@
                             <span class="tip-author">- Emily B.</span>
                         </div>
                     </div>
-                    <!-- Printer Tips -->
+                    <!-- NEW: Printer Tips -->
                     <div id="tips-printer" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"To save ink, always print in 'Draft' mode for documents that aren't for a final presentation. It's a lifesaver!"</p>
                             <span class="tip-author">- PrintMaster</span>
                         </div>
                     </div>
-                    <!-- TV Tips -->
+                    <!-- NEW: TV Tips -->
                     <div id="tips-tv" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Go into the settings and turn off 'Motion Smoothing' (sometimes called 'TruMotion'). It makes movies look much better and less like a soap opera."</p>
                             <span class="tip-author">- Cinephile88</span>
                         </div>
                     </div>
-                    <!-- Washing Machine Tips -->
+                    <!-- NEW: Washing Machine Tips -->
                     <div id="tips-washing-machine" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Don't just guess with detergent! Too much can leave residue. I found that one tablespoon of liquid is enough for most loads."</p>
                             <span class="tip-author">- CleanFreak</span>
                         </div>
                     </div>
-                    <!-- Laptop Tips -->
+                    <!-- NEW: Laptop Tips -->
                     <div id="tips-laptop" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"To quickly improve performance, check your 'Startup Apps' in Task Manager and disable anything you don't need."</p>
                             <span class="tip-author">- LappyFan</span>
                         </div>
                     </div>
-                    <!-- Tablet Tips -->
+                    <!-- NEW: Tablet Tips -->
                     <div id="tips-tablet" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Get a good screen protector and a case that doubles as a stand. It makes watching videos so much better."</p>
                             <span class="tip-author">- MediaManiac</span>
                         </div>
                     </div>
-                    <!-- PC Tips -->
+                    <!-- NEW: PC Tips -->
                     <div id="tips-pc" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Don't forget to clean the dust filters on your PC case every few months. It keeps it running cool and quiet."</p>
                             <span class="tip-author">- PCBuilder</span>
                         </div>
                     </div>
-                    <!-- Smartwatch Tips -->
+                    <!-- NEW: Smartwatch Tips -->
                     <div id="tips-smartwatch" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"To save battery, I use a simple watch face with a black background."</p>
                             <span class="tip-author">- WatchFan</span>
                         </div>
                     </div>
-                    <!-- Camera Tips -->
+                    <!-- NEW: Camera Tips -->
                     <div id="tips-camera" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Always shoot in RAW format if you plan on editing your photos later. It gives you so much more flexibility."</p>
                             <span class="tip-author">- Shutterbug</span>
                         </div>
                     </div>
-                    <!-- Audio Tips -->
+                    <!-- NEW: Audio Tips -->
                     <div id="tips-audio" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"For Bluetooth speakers, always check for a firmware update via the manufacturer's app. It can sometimes improve audio quality!"</p>
                             <span class="tip-author">- AudioPhile</span>
                         </div>
                     </div>
-                    <!-- Smart Home Tips -->
+                    <!-- NEW: Smart Home Tips -->
                     <div id="tips-smart-home" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Create a 'Good Morning' routine on your smart speaker. Mine turns on the lights, reads the news, and starts the coffee machine."</p>
                             <span class="tip-author">- HomeAuto</span>
                         </div>
                     </div>
-                    <!-- Networking Tips -->
+                    <!-- NEW: Networking Tips -->
                     <div id="tips-networking" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"If your Wi-Fi is slow, try restarting your router. If that doesn't work, try changing the Wi-Fi channel in the router settings."</p>
                             <span class="tip-author">- NetAdmin</span>
                         </div>
                     </div>
-                    <!-- Kitchen Tips -->
+                    <!-- NEW: Kitchen Tips -->
                     <div id="tips-kitchen" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"For microwaves: never use metal! And cover your food with a paper towel to prevent splatters."</p>
                             <span class="tip-author">- ChefMike</span>
                         </div>
                     </div>
-                    <!-- Health Tips -->
+                    <!-- NEW: Health Tips -->
                     <div id="tips-health" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"For blood pressure monitors, make sure you sit still and quiet for 5 minutes before taking a reading. Don't cross your legs!"</p>
                             <span class="tip-author">- NurseJoy</span>
                         </div>
                     </div>
-                    <!-- Game Tips -->
+                    <!-- NEW: Game Tips -->
                     <div id="tips-gaming" class="hidden">
                         <div class="tip">
                             <p class="tip-body">"Make sure your console has enough space around it for air to flow. Overheating is the number one enemy of consoles!"</p>
@@ -1233,7 +1308,21 @@
                         <!-- Chat messages will be added here -->
                     </div>
                     <div id="chat-form-container">
+                        <!-- NEW: Chat Attachment Preview -->
+                        <div id="chat-preview-container" class="hidden">
+                            <img id="chat-preview-image" src="" alt="Preview">
+                            <span>Image attached</span>
+                            <button id="chat-remove-preview">&times;</button>
+                        </div>
                         <form id="chat-form">
+                            <!-- NEW: Chat icon buttons -->
+                            <input type="file" id="chat-file-input" class="hidden" accept="image/*">
+                            <button type="button" id="chat-attach-btn" class="chat-icon-btn" aria-label="Attach image">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                            </button>
+                            <button type="button" id="mic-btn" class="chat-icon-btn" aria-label="Use voice input">
+                                <svg id="mic-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
+                            </button>
                             <input type="text" id="chat-input" placeholder="Ask a follow-up question..." required>
                             <button type="submit" id="chat-submit" class="btn btn-primary">Send</button>
                         </form>
@@ -1386,7 +1475,14 @@
         const chatHistory = document.getElementById('chat-history');
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
-        const chatSuggestions = document.getElementById('chat-suggestions'); // NEW
+        const chatSuggestions = document.getElementById('chat-suggestions'); 
+        const chatAttachBtn = document.getElementById('chat-attach-btn');
+        const chatFileInput = document.getElementById('chat-file-input');
+        const chatPreviewContainer = document.getElementById('chat-preview-container');
+        const chatPreviewImage = document.getElementById('chat-preview-image');
+        const chatRemovePreview = document.getElementById('chat-remove-preview');
+        const micBtn = document.getElementById('mic-btn');
+        let chatFile = null;
         
         let identifiedDevice = null; // This will store the device name
 
@@ -1649,12 +1745,20 @@
             // --- NEW: Activate Chatbot ---
             // Try to find the device name in the first <b> tag
             const deviceNameMatch = rawText.match(/<b>(.*?)<\/b>/);
+            let extractedName = "your device";
             if (deviceNameMatch && deviceNameMatch[1]) {
-                identifiedDevice = deviceNameMatch[1];
+                extractedName = deviceNameMatch[1];
             } else {
                 // Fallback: use the first line of clean text
-                identifiedDevice = cleanText.split('.')[0];
+                extractedName = cleanText.split('.')[0];
             }
+            
+            // Clean up the extracted name
+            identifiedDevice = extractedName
+                .replace('This appears to be an ', '')
+                .replace('Here is the guide for the ', '')
+                .replace('.', '');
+            
             
             // Show the chat UI
             chatPlaceholder.classList.add('hidden');
@@ -1809,9 +1913,31 @@
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const question = chatInput.value;
-            if (!question || !identifiedDevice) return;
+            if ((!question && !chatFile) || !identifiedDevice) return; // Must have text or file
 
-            appendChatMessage('user', question); // Show user's message
+            // Create form data
+            const chatFormData = new FormData();
+            chatFormData.append("device", identifiedDevice);
+            chatFormData.append("question", question);
+            chatFormData.append("language", languageSelect.value);
+            
+            let userMessage = question;
+            
+            // Handle file attachment
+            if (chatFile) {
+                chatFormData.append("file", chatFile, chatFile.name);
+                
+                // Create a preview URL for the message
+                const previewUrl = URL.createObjectURL(chatFile);
+                userMessage = `<img src="${previewUrl}" alt="User upload"><br>${question}`;
+                
+                // Clear the preview
+                chatFile = null;
+                chatFileInput.value = '';
+                chatPreviewContainer.classList.add('hidden');
+            }
+
+            appendChatMessage('user', userMessage); // Show user's message
             chatInput.value = '';
             chatSuggestions.classList.add('hidden'); // NEW: Hide suggestions
             appendChatMessage('bot', 'Typing...'); // Show typing indicator
@@ -1819,11 +1945,7 @@
             try {
                 const response = await fetch(chatBackendUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        device: identifiedDevice,
-                        question: question
-                    })
+                    body: chatFormData, // Send as FormData, not JSON
                 });
 
                 if (!response.ok) {
@@ -1845,7 +1967,14 @@
                 const typingIndicator = chatHistory.querySelector('.typing');
                 if(typingIndicator) typingIndicator.remove();
                 
-                appendChatMessage('bot', `Sorry, I had trouble with that: ${error.message}`);
+                // *** UPDATED CATCH BLOCK ***
+                let errorMsg = "An unknown error occurred.";
+                if (error instanceof Error) {
+                    errorMsg = error.message;
+                } else if (typeof error === 'string') {
+                    errorMsg = error;
+                }
+                appendChatMessage('bot', `Sorry, I had trouble with that: ${errorMsg}`);
             }
         });
         
@@ -1857,7 +1986,7 @@
                 msgDiv.classList.add('typing');
                 msgDiv.innerHTML = '<i>Typing...</i>';
             } else {
-                msgDiv.innerHTML = message; // Message is already HTML from AI
+                msgDiv.innerHTML = message; // Message is already HTML
             }
             
             chatHistory.appendChild(msgDiv);
@@ -1865,7 +1994,82 @@
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }
         
-        // --- NEW: Chat Suggestion Logic ---
+        // --- Chat Attachment Logic ---
+        chatAttachBtn.addEventListener('click', () => {
+            chatFileInput.click();
+        });
+        
+        chatFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                chatFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    chatPreviewImage.src = e.target.result;
+                    chatPreviewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        chatRemovePreview.addEventListener('click', () => {
+            chatFile = null;
+            chatFileInput.value = '';
+            chatPreviewContainer.classList.add('hidden');
+        });
+        
+        // --- Voice Input Logic ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+
+            recognition.onstart = () => {
+                micBtn.classList.add('is-listening');
+            };
+
+            recognition.onend = () => {
+                micBtn.classList.remove('is-listening');
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error:", event.error);
+                micBtn.classList.remove('is-listening');
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                chatInput.value = finalTranscript + interimTranscript;
+            };
+
+            micBtn.addEventListener('click', () => {
+                if (synth.speaking) stopSpeech();
+                
+                if (micBtn.classList.contains('is-listening')) {
+                    recognition.stop();
+                } else {
+                    const selectedOption = languageSelect.options[languageSelect.selectedIndex];
+                    recognition.lang = selectedOption.dataset.lang || 'en-US';
+                    recognition.start();
+                }
+            });
+        } else {
+            micBtn.style.display = 'none'; // Hide mic if not supported
+        }
+
+        
+        // --- Chat Suggestion Logic ---
         const suggestionChips = document.querySelectorAll('.suggestion-chip');
         suggestionChips.forEach(chip => {
             chip.addEventListener('click', () => {
@@ -1902,7 +2106,7 @@
                 const query = button.dataset.query;
                 searchInput.value = query; // Pre-fill the search bar
                 
-                // Scroll to the generator section
+                // Scroll to the search section
                 document.getElementById('search').scrollIntoView();
                 
                 //- REMOVED: generateManualFromText(query);
@@ -1923,7 +2127,7 @@
                 }
             }
             
-            // If no more hidden cards, hide View More and show View Less
+            // If no more hidden cards, hide View More
             if (document.querySelectorAll('.library-card.hidden-card').length === 0) {
                 viewMoreBtn.classList.add('hidden');
             }
