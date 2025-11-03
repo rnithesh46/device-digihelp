@@ -1757,7 +1757,9 @@
             identifiedDevice = extractedName
                 .replace('This appears to be an ', '')
                 .replace('Here is the guide for the ', '')
-                .replace('.', '');
+                .replace('Here is the guide for ', '') // Just in case
+                .replace(/\.$/, '') // Remove trailing period
+                .trim();
             
             
             // Show the chat UI

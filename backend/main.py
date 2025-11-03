@@ -1,7 +1,7 @@
 import os
 import io
 import google.generativeai as genai
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import uvicorn
@@ -11,9 +11,12 @@ import ssl
 from email.message import EmailMessage
 from dotenv import load_dotenv
 from typing import Optional # Import Optional
+from pathlib import Path  # <-- 1. ADD THIS IMPORT
 
-# Load environment variables from .env file
-load_dotenv() 
+# --- FIX: Point load_dotenv to the correct .env file ---
+# This finds the directory where main.py is and looks for .env in that same directory
+env_path = Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=env_path) # <-- 2. UPDATE THIS LINE
 
 # 1. Load Environment Variables
 # These are now loaded from your .env file
@@ -186,8 +189,12 @@ async def generate_manual(
             system_instruction=dynamic_system_prompt
         )
         
+        # *** FIX ***: Added a simple text prompt to accompany the image.
+        # This can help resolve 500 errors from the API.
+        user_prompt_text = "Please identify this device and generate its manual."
+        
         response = instructed_model.generate_content(
-            [img], # Send just the image
+            [user_prompt_text, img], # Send text AND image
             generation_config=generation_config,
             safety_settings=safety_settings,
             stream=False,
@@ -258,6 +265,13 @@ async def ask_follow_up(
             model_name="gemini-2.5-flash-preview-09-2025",
             system_instruction=dynamic_chat_prompt
         )
+        
+        safety_settings = [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+        ]
 
         # Build the prompt list
         prompt_parts = []
@@ -277,7 +291,11 @@ async def ask_follow_up(
         prompt_parts.append(f"User Question: {question}")
         
         # Send all parts to the model
-        response = chat_model.generate_content(prompt_parts)
+        response = chat_model.generate_content(
+            prompt_parts,
+            generation_config=generation_config,
+            safety_settings=safety_settings
+        )
         
         if response and response.text:
             return {"answer": response.text}
