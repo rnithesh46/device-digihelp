@@ -158,7 +158,8 @@ def send_email(subject: str, body: str, reply_to: EmailStr = None):
         print(f"Error: {e}")
         return False
 
-# --- NEW: Helper Function for Google Image Search ---
+# --- *** FIX: MOVED THIS FUNCTION UP *** ---
+# --- Helper Function for Google Image Search ---
 def get_image_url(query: str) -> Optional[str]:
     try:
         service = build("customsearch", "v1", developerKey=CUSTOM_SEARCH_API_KEY)
@@ -223,7 +224,7 @@ async def generate_manual(
 async def generate_manual_from_text(request: TextManualRequest):
     try:
         # --- NEW: Call image search first ---
-        image_url = get_image_url(request.query)
+        image_url = get_image_url(request.query) # This function is now defined above
         
         dynamic_system_prompt = TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE.format(language=request.language)
         safety_settings = [
@@ -329,25 +330,7 @@ async def submit_contact_form(form_data: ContactForm):
         print(f"Error in contact form: {e}")
         raise HTTPException(status_code=500, detail="Error processing contact form.")
 
-# --- NEW: Helper Function for Google Image Search ---
-def get_image_url(query: str) -> Optional[str]:
-    try:
-        service = build("customsearch", "v1", developerKey=CUSTOM_SEARCH_API_KEY)
-        result = service.cse().list(
-            q=query,
-            cx=SEARCH_ENGINE_ID,
-            searchType="image",
-            num=1,
-            safe="high" # Enable safe search
-        ).execute()
-        
-        if "items" in result and len(result["items"]) > 0:
-            return result["items"][0]["link"]
-        else:
-            return None
-    except Exception as e:
-        print(f"Error during image search: {e}")
-        return None
-
-# --- API Endpoints ---
+# 5. Run the App
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
