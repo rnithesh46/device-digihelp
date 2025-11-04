@@ -11,38 +11,33 @@ import ssl
 from email.message import EmailMessage
 from dotenv import load_dotenv
 from typing import Optional 
-from pathlib import Path  # <-- 1. IMPORT PATHLIB
+from pathlib import Path
 from googleapiclient.discovery import build 
 
-# --- 2. FIX: Point load_dotenv to the correct .env file ---
-# This finds the directory where main.py is and looks for .env in that same directory
-env_path = Path(__file__).parent / ".env"
-load_dotenv(dotenv_path=env_path) 
+# --- SIMPLIFIED .env LOADING ---
+# This will load the .env file if it exists (on your computer)
+# On Vercel, it will do nothing, and the Vercel environment variables will be used instead.
+load_dotenv() 
 
 # 1. Load Environment Variables
-# These are now loaded from your .env file
 API_KEY = os.getenv("GEMINI_API_KEY")
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_APP_PASSWORD = os.getenv("SENDER_APP_PASSWORD")
 YOUR_NAME = "DeviceDigiHelp Support"
-
-# --- NEW: Load Search API Keys ---
 CUSTOM_SEARCH_API_KEY = os.getenv("CUSTOM_SEARCH_API_KEY")
 SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
 
 # 2. Validate Environment Variables
 if not API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable not set. Please set it in your backend/.env file.")
+    raise ValueError("GEMINI_API_KEY environment variable not set. Please set it in your .env file or Vercel settings.")
 if not SENDER_EMAIL:
-    raise ValueError("SENDER_EMAIL environment variable not set (your Gmail address). Please set it in your backend/.env file.")
+    raise ValueError("SENDER_EMAIL environment variable not set. Please set it in your .env file or Vercel settings.")
 if not SENDER_APP_PASSWORD:
-    raise ValueError("SENDER_APP_PASSWORD environment variable not set (your 16-character App Password). Please set it in your backend/.env file.")
-
-# --- NEW: Validate Search Keys ---
+    raise ValueError("SENDER_APP_PASSWORD environment variable not set. Please set it in your .env file or Vercel settings.")
 if not CUSTOM_SEARCH_API_KEY:
-    raise ValueError("CUSTOM_SEARCH_API_KEY environment variable not set. Please set it in your backend/.env file.")
+    raise ValueError("CUSTOM_SEARCH_API_KEY environment variable not set. Please set it in your .env file or Vercel settings.")
 if not SEARCH_ENGINE_ID:
-    raise ValueError("SEARCH_ENGINE_ID environment variable not set. Please set it in your backend/.env file.")
+    raise ValueError("SEARCH_ENGINE_ID environment variable not set. Please set it in your .env file or Vercel settings.")
 
 # 3. Configure Gemini
 genai.configure(api_key=API_KEY)
@@ -226,8 +221,7 @@ async def generate_manual(
 @app.post("/generate-manual-from-text/")
 async def generate_manual_from_text(request: TextManualRequest):
     try:
-        # --- NEW: Call image search first ---
-        image_url = get_image_url(request.query) # This function is now defined above
+        image_url = get_image_url(request.query) 
         
         dynamic_system_prompt = TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE.format(language=request.language)
         safety_settings = [
@@ -248,7 +242,6 @@ async def generate_manual_from_text(request: TextManualRequest):
         )
 
         if response and response.text:
-            # --- NEW: Return both manual and image URL ---
             return {"manual_text": response.text, "image_url": image_url}
         else:
             raise HTTPException(status_code=500, detail="Failed to generate content or response was blocked.")
