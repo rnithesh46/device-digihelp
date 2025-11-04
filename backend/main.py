@@ -11,14 +11,16 @@ import ssl
 from email.message import EmailMessage
 from dotenv import load_dotenv
 from typing import Optional 
-from pathlib import Path
-from googleapiclient.discovery import build # <-- NEW IMPORT
+from pathlib import Path  # <-- 1. IMPORT PATHLIB
+from googleapiclient.discovery import build 
 
-# --- Load .env file ---
+# --- 2. FIX: Point load_dotenv to the correct .env file ---
+# This finds the directory where main.py is and looks for .env in that same directory
 env_path = Path(__file__).parent / ".env"
 load_dotenv(dotenv_path=env_path) 
 
 # 1. Load Environment Variables
+# These are now loaded from your .env file
 API_KEY = os.getenv("GEMINI_API_KEY")
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_APP_PASSWORD = os.getenv("SENDER_APP_PASSWORD")
@@ -136,6 +138,8 @@ class TextManualRequest(BaseModel):
     query: str
     language: str
 
+# Note: We no longer use a Pydantic model for the chat, as it now uses FormData
+
 # --- Helper Function for Sending Email ---
 def send_email(subject: str, body: str, reply_to: EmailStr = None):
     try:
@@ -158,7 +162,6 @@ def send_email(subject: str, body: str, reply_to: EmailStr = None):
         print(f"Error: {e}")
         return False
 
-# --- *** FIX: MOVED THIS FUNCTION UP *** ---
 # --- Helper Function for Google Image Search ---
 def get_image_url(query: str) -> Optional[str]:
     try:
@@ -219,7 +222,7 @@ async def generate_manual(
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
-# --- UPDATED: Generate Manual from Text Endpoint ---
+# --- Generate Manual from Text Endpoint ---
 @app.post("/generate-manual-from-text/")
 async def generate_manual_from_text(request: TextManualRequest):
     try:
