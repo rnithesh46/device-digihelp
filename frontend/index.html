@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,65 +8,151 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- Base & Reset --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; background-color: #F9FAFB; color: #1F2937; line-height: 1.5; }
-        a { color: inherit; text-decoration: inherit; }
-        button, input, textarea, select { font-family: inherit; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
 
         /* --- Utility & Layout --- */
-        .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
 
         /* --- Header & Navigation --- */
-        header { 
-            background-color: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(4px); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Softer shadow */
-            position: sticky; 
-            top: 0; 
-            z-index: 50; 
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            /* Softer shadow */
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
-        header nav { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; padding-bottom: 1rem; }
-        
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
         /* NEW: SVG Logo */
         .logo {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 700; /* font-bold */
-            color: #111827; /* text-gray-900 */
+            font-size: 1.25rem;
+            /* text-xl */
+            font-weight: 700;
+            /* font-bold */
+            color: #111827;
+            /* text-gray-900 */
         }
-        .logo svg {
-            width: 2.25rem; /* h-9 */
-            height: 2.25rem; /* w-9 */
-        }
-        .logo span { color: #2563EB; }
 
-        .nav-links { display: none; column-gap: 1.5rem; align-items: center; }
-        .nav-link { 
-            color: #4B5563; 
+        .logo svg {
+            width: 2.25rem;
+            /* h-9 */
+            height: 2.25rem;
+            /* w-9 */
+        }
+
+        #d{
+            color: #2563EB;
+        }
+
+        .nav-links {
+            display: none;
+            column-gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #4B5563;
             transition: all 0.2s ease-in-out;
             padding-bottom: 4px;
             border-bottom: 2px solid transparent;
         }
-        .nav-link:hover { color: #2563EB; border-bottom-color: #2563EB; }
-        .nav-link-active { color: #2563EB; font-weight: 600; border-bottom-color: #2563EB; }
-        #mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: #374151; }
-        #mobile-menu-btn svg { width: 1.5rem; height: 1.5rem; }
-        #mobile-menu { display: none; background-color: #ffffff; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-        #mobile-menu .nav-link { display: block; padding: 0.75rem 1.5rem; }
-        #mobile-menu .nav-link:hover { background-color: #EFF6FF; }
+
+        .nav-link:hover {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+
+        .nav-link-active {
+            color: #2563EB;
+            font-weight: 600;
+            border-bottom-color: #2563EB;
+        }
+
+        #mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #374151;
+        }
+
+        #mobile-menu-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        #mobile-menu {
+            display: none;
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        #mobile-menu .nav-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+        }
+
+        #mobile-menu .nav-link:hover {
+            background-color: #EFF6FF;
+        }
 
         /* --- Hero Section --- */
-        #home { 
-            background: #F9FAFB; /* Fallback */
-            padding-top: 5rem; 
-            padding-bottom: 6rem; 
-            text-align: center; 
+        #home {
+            background: #F9FAFB;
+            /* Fallback */
+            padding-top: 5rem;
+            padding-bottom: 6rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
+
         /* NEW: Hero background glow */
         #home::before {
             content: '';
@@ -79,263 +166,484 @@
             z-index: 0;
             pointer-events: none;
         }
+
         #home .container {
-            position: relative; /* Ensure content is above glow */
+            position: relative;
+            /* Ensure content is above glow */
             z-index: 1;
         }
 
-        #home h1 { font-size: 2.25rem; font-weight: 700; color: #111827; line-height: 1.25; }
-        #home .subtitle { margin-top: 1.5rem; font-size: 1.125rem; color: #4B5563; max-width: 56rem; margin-left: auto; margin-right: auto; }
+        #home h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.25;
+        }
+
+        #home .subtitle {
+            margin-top: 1.5rem;
+            font-size: 1.125rem;
+            color: #4B5563;
+            max-width: 56rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         #home .tagline {
             font-size: 1rem;
-            color: #3B82F6; /* blue-500 */
+            color: #3B82F6;
+            /* blue-500 */
             font-weight: 500;
             margin-top: 1rem;
         }
-        #home .button-group { margin-top: 2.5rem; display: flex; flex-direction: column; justify-content: center; row-gap: 1rem; }
-        
-        .btn { 
-            font-weight: 500; 
-            padding: 0.75rem 2rem; 
-            border-radius: 0.5rem; 
-            font-size: 1.125rem; 
-            transition: all 0.2s ease-in-out; 
-            cursor: pointer; 
+
+        #home .button-group {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 1rem;
+        }
+
+        .btn {
+            font-weight: 500;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
             border: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        .btn-primary { 
-            background: linear-gradient(to right, #2563EB, #3B82F6); /* New gradient */
-            color: #ffffff; 
+
+        .btn-primary {
+            background: linear-gradient(to right, #2563EB, #3B82F6);
+            /* New gradient */
+            color: #ffffff;
         }
-        .btn-primary:hover { 
+
+        .btn-primary:hover {
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
             transform: scale(1.03) translateY(-2px);
         }
-        .btn-secondary { 
-            background-color: #ffffff; 
-            color: #1F2937; 
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #1F2937;
             border: 1px solid #E5E7EB;
         }
-        .btn-secondary:hover { 
+
+        .btn-secondary:hover {
             background-color: #F9FAFB;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             transform: scale(1.03) translateY(-2px);
         }
-        
+
         /* Disabled button style */
         .btn:disabled {
-            background: #9CA3AF; /* bg-gray-400 */
-            color: #E5E7EB; /* text-gray-200 */
+            background: #9CA3AF;
+            /* bg-gray-400 */
+            color: #E5E7EB;
+            /* text-gray-200 */
             cursor: not-allowed;
             box-shadow: none;
             transform: none;
         }
+
         .btn:disabled:hover {
             background: #9CA3AF;
         }
 
 
         /* --- Shared Section Styles --- */
-        section { padding-top: 5rem; padding-bottom: 5rem; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { 
-            font-size: 1.875rem; 
-            font-weight: 700; 
+        section {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
             color: #111827;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
         }
+
         .section-header h2 svg {
             width: 1.75rem;
             height: 1.75rem;
             color: #3B82F6;
             opacity: 0.8;
         }
-        .section-header p { margin-top: 1rem; font-size: 1.125rem; color: #4B5563; max-width: 42rem; margin-left: auto; margin-right: auto; }
+
+        .section-header p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: #4B5563;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
         /* Card styles for Generator, About */
-        .card { 
-            background-color: #ffffff; 
-            padding: 2rem; 
-            border-radius: 0.75rem; /* More rounded */
-            border: 1px solid #E5E7EB; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Softer shadow */
-            display: flex; 
-            flex-direction: column; 
+        .card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            /* More rounded */
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            /* Softer shadow */
+            display: flex;
+            flex-direction: column;
             transition: all 0.2s ease-in-out;
         }
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
         }
-        .card h3 { font-size: 1.5rem; font-weight: 600; color: #111827; margin-bottom: 1.5rem; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
 
         /* --- AI Generator Section --- */
-        #generator { background-color: #F9FAFB; }
-        #generator .grid-container { 
-            max-width: 64rem; 
-            margin-left: auto; 
-            margin-right: auto; 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 2rem; 
-        }
-        
-        /* Language Selector */
-        #language-selector { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
-        #language-selector label { font-size: 0.875rem; font-weight: 500; color: #374151; }
-        #language-select { width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #D1D5DB; background-color: #fff; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%2O xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236B7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22M6%208l4%204%204-4%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25em; }
-
-        /* Updated Drop Zone */
-        #drop-zone { 
-            width: 100%; 
-            padding: 2.5rem; 
-            border-radius: 0.5rem; 
-            text-align: center; 
-            border: 2px dashed #D1D5DB; 
+        #generator {
             background-color: #F9FAFB;
         }
+
+        #generator .grid-container {
+            max-width: 64rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* Language Selector */
+        #language-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        #language-selector label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        #language-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #D1D5DB;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%2O xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236B7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22M6%208l4%204%204-4%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.25em;
+        }
+
+        /* Updated Drop Zone */
+        #drop-zone {
+            width: 100%;
+            padding: 2.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 2px dashed #D1D5DB;
+            background-color: #F9FAFB;
+        }
+
         #drop-zone-buttons {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
+
         #drop-zone-buttons .btn {
             width: 100%;
         }
+
         @media (min-width: 640px) {
             #drop-zone-buttons {
                 flex-direction: row;
             }
         }
-        
-        #image-preview-container { margin-top: 1.5rem; }
-        #image-preview-container p { font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem; }
-        #image-preview { width: 100%; border-radius: 0.5rem; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05); border: 1px solid #E5E7EB; }
-        #remove-image { margin-top: 0.75rem; font-size: 0.875rem; color: #DC2626; cursor: pointer; background: none; border: none; }
-        #remove-image:hover { color: #991B1B; }
 
-        .output-area { position: relative; }
-        
+        #image-preview-container {
+            margin-top: 1.5rem;
+        }
+
+        #image-preview-container p {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        #image-preview {
+            width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+        }
+
+        #remove-image {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: #DC2626;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        #remove-image:hover {
+            color: #991B1B;
+        }
+
+        .output-area {
+            position: relative;
+        }
+
         /* Scrollable content wrapper */
         #output-scroll-wrapper {
-            max-height: 500px; /* Fixed max-height */
-            flex-grow: 1; 
-            min-height: 0; 
-            overflow-y: auto; /* Allow scrolling */
+            max-height: 500px;
+            /* Fixed max-height */
+            flex-grow: 1;
+            min-height: 0;
+            overflow-y: auto;
+            /* Allow scrolling */
             position: relative;
-            padding: 1px; 
-            margin-top: 1.5rem; 
-            border-top: 1px solid #e5e7eb; 
+            padding: 1px;
+            margin-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
             padding-top: 1.5rem;
         }
-        
+
         /* Force grid columns to be equal height on desktop */
         @media (min-width: 768px) {
-            #generator .grid-container { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 3rem; 
-                align-items: stretch; /* This makes both columns equal height */
+            #generator .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+                align-items: stretch;
+                /* This makes both columns equal height */
             }
         }
 
 
-        .placeholder-or-loader { text-align: center; padding: 2.5rem 0; }
-        .spinner { width: 3rem; height: 3rem; border-radius: 9999px; border-width: 4px; border-color: #E5E7EB; border-top-color: #3b82f6; margin-left: auto; margin-right: auto; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .placeholder-or-loader p { margin-top: 1rem; color: #4B5563; }
-        #output-placeholder svg { width: 4rem; height: 4rem; margin: auto; color: #D1D5DB; }
-        #output-placeholder p { color: #9CA3AF; }
+        .placeholder-or-loader {
+            text-align: center;
+            padding: 2.5rem 0;
+        }
+
+        .spinner {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            border-width: 4px;
+            border-color: #E5E7EB;
+            border-top-color: #3b82f6;
+            margin-left: auto;
+            margin-right: auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .placeholder-or-loader p {
+            margin-top: 1rem;
+            color: #4B5563;
+        }
+
+        #output-placeholder svg {
+            width: 4rem;
+            height: 4rem;
+            margin: auto;
+            color: #D1D5DB;
+        }
+
+        #output-placeholder p {
+            color: #9CA3AF;
+        }
 
         /* TTS Button */
         #tts-button {
-            background-color: #EFF6FF; 
-            color: #2563EB; 
-            border: 1px solid #BFDBFE; 
-            border-radius: 9999px; 
-            width: 2.5rem; 
-            height: 2.5rem; 
+            background-color: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #BFDBFE;
+            border-radius: 9999px;
+            width: 2.5rem;
+            height: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            top: 1.25rem; 
+            top: 1.25rem;
             right: 1.25rem;
             transition: all 0.2s ease;
         }
-        #tts-button:hover { background-color: #DBEAFE; }
-        #tts-button.playing { background-color: #FEF2F2; color: #DC2626; border-color: #FECACA; }
-        #tts-button svg { width: 1.25rem; height: 1.25rem; }
-        
+
+        #tts-button:hover {
+            background-color: #DBEAFE;
+        }
+
+        #tts-button.playing {
+            background-color: #FEF2F2;
+            color: #DC2626;
+            border-color: #FECACA;
+        }
+
+        #tts-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
         /* Download Button */
         #download-btn {
-            background-color: #F3F4F6; /* bg-gray-100 */
-            color: #374151; /* text-gray-700 */
-            border: 1px solid #E5E7EB; /* border-gray-200 */
-            border-radius: 9999px; /* rounded-full */
-            width: 2.5rem; 
-            height: 2.5rem; 
+            background-color: #F3F4F6;
+            /* bg-gray-100 */
+            color: #374151;
+            /* text-gray-700 */
+            border: 1px solid #E5E7EB;
+            /* border-gray-200 */
+            border-radius: 9999px;
+            /* rounded-full */
+            width: 2.5rem;
+            height: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            top: 1.25rem; 
-            right: 4.25rem; /* Next to TTS button */
+            top: 1.25rem;
+            right: 4.25rem;
+            /* Next to TTS button */
             transition: all 0.2s ease;
         }
-        #download-btn:hover { background-color: #E5E7EB; }
-        #download-btn svg { width: 1.25rem; height: 1.25rem; }
+
+        #download-btn:hover {
+            background-color: #E5E7EB;
+        }
+
+        #download-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
 
 
-        #error-message { padding: 1rem; border-radius: 0.5rem; background-color: #FEF2F2; border: 1px solid #FEE2E2; color: #B91C1C; }
-        #error-message p:first-child { font-weight: 500; }
-        #error-message #error-text { font-size: 0.875rem; }
-        
-        #output-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #111827; }
-        #output-content h4 { font-size: 1.125rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #111827; }
-        #output-content ul { list-style-type: disc; list-style-position: outside; padding-left: 1.25rem; margin-bottom: 1rem; display: grid; gap: 0.25rem; }
-        #output-content li { padding-left: 0.25rem; color: #374151; }
-        .hidden { display: none !important; }
+        #error-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: #FEF2F2;
+            border: 1px solid #FEE2E2;
+            color: #B91C1C;
+        }
+
+        #error-message p:first-child {
+            font-weight: 500;
+        }
+
+        #error-message #error-text {
+            font-size: 0.875rem;
+        }
+
+        #output-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #111827;
+        }
+
+        #output-content h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+            margin-bottom: 0.25rem;
+            color: #111827;
+        }
+
+        #output-content ul {
+            list-style-type: disc;
+            list-style-position: outside;
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+            display: grid;
+            gap: 0.25rem;
+        }
+
+        #output-content li {
+            padding-left: 0.25rem;
+            color: #374151;
+        }
+
+        .hidden {
+            display: none !important;
+        }
 
         /* --- Community Tips --- */
         /* This is now a full section */
         #tips-section {
             background-color: #ffffff;
         }
+
         #tips-section .section-header h2 {
             font-size: 1.875rem;
             font-weight: 700;
             color: #111827;
         }
+
         #tips-section .section-header p {
             font-style: italic;
             color: #6B7280;
         }
+
         #tips-device-name {
             color: #2563EB;
         }
+
         .tips-container {
-            max-width: 48rem; /* max-w-3xl */
+            max-width: 48rem;
+            /* max-w-3xl */
             margin-left: auto;
             margin-right: auto;
             display: grid;
             gap: 1rem;
         }
+
         .tip {
             background-color: #F9FAFB;
             border: 1px solid #F3F4F6;
             border-radius: 0.5rem;
             padding: 1rem;
         }
+
         .tip-body {
             font-style: italic;
             color: #374151;
         }
+
         .tip-author {
             display: block;
             text-align: right;
@@ -346,56 +654,91 @@
         }
 
         /* --- Search Section --- */
-        #search { background-color: #ffffff; }
+        #search {
+            background-color: #ffffff;
+        }
+
         #search-form-container {
-            max-width: 48rem; /* max-w-3xl */
+            max-width: 48rem;
+            /* max-w-3xl */
             margin-left: auto;
             margin-right: auto;
-            background-color: #F9FAFB; /* bg-gray-50 */
-            padding: 2rem; /* p-8 */
-            border-radius: 0.75rem; /* rounded-lg */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 1px solid #F3F4F6; /* border-gray-100 */
+            background-color: #F9FAFB;
+            /* bg-gray-50 */
+            padding: 2rem;
+            /* p-8 */
+            border-radius: 0.75rem;
+            /* rounded-lg */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #F3F4F6;
+            /* border-gray-100 */
         }
+
         #search-form {
             display: flex;
-            gap: 0.5rem; /* space-x-2 */
+            gap: 0.5rem;
+            /* space-x-2 */
         }
+
         #search-input {
-            flex-grow: 1; /* w-full */
-            padding: 0.75rem 1rem; /* px-4 py-3 */
-            border-radius: 0.5rem; /* rounded-lg */
-            border: 1px solid #D1D5DB; /* border-gray-300 */
+            flex-grow: 1;
+            /* w-full */
+            padding: 0.75rem 1rem;
+            /* px-4 py-3 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            border: 1px solid #D1D5DB;
+            /* border-gray-300 */
             outline: none;
             font-size: 1rem;
             transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-        #search-input:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #BFDBFE; }
-        #search-submit { padding-left: 1.5rem; padding-right: 1.5rem; border-radius: 0.5rem; }
+
+        #search-input:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px #BFDBFE;
+        }
+
+        #search-submit {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-radius: 0.5rem;
+        }
 
 
         /* --- Library Section --- */
-        #library { background-color: #F9FAFB; }
+        #library {
+            background-color: #F9FAFB;
+        }
+
         .library-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            gap: 1.5rem; /* gap-6 */
+            gap: 1.5rem;
+            /* gap-6 */
         }
+
         /* Note for library */
-        .updated-note { 
-            font-style: italic; 
-            color: #6B7280; 
-            margin-top: -3.5rem; 
-            margin-bottom: 4rem; 
+        .updated-note {
+            font-style: italic;
+            color: #6B7280;
+            margin-top: -3.5rem;
+            margin-bottom: 4rem;
             font-size: 0.875rem;
         }
 
         @media (min-width: 640px) {
-            .library-grid { grid-template-columns: repeat(2, 1fr); }
+            .library-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
+
         @media (min-width: 1024px) {
-            .library-grid { grid-template-columns: repeat(3, 1fr); }
+            .library-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
+
         .library-card {
             background-color: #ffffff;
             border-radius: 0.75rem;
@@ -406,51 +749,61 @@
             flex-direction: column;
             overflow: hidden;
         }
-        .library-card:hover { 
+
+        .library-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
+
         .library-card-content {
             padding: 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
+
         .library-card-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1rem;
         }
+
         .library-card-header svg {
             width: 1.5rem;
             height: 1.5rem;
             color: #2563EB;
             flex-shrink: 0;
         }
+
         .library-card h4 {
             font-size: 1.25rem;
             font-weight: 600;
             color: #111827;
             margin: 0;
         }
+
         .library-card p {
             color: #4B5563;
             margin-top: 0.5rem;
             flex-grow: 1;
         }
+
         .library-card-footer {
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid #E5E7EB;
         }
+
         .library-card .btn {
             width: 100%;
             text-align: center;
         }
+
         .library-card.hidden-card {
             display: none;
         }
+
         .view-more-container {
             margin-top: 2rem;
             text-align: center;
@@ -461,8 +814,10 @@
 
 
         /* --- Chat Support Section --- */
-        #chat { background-color: #ffffff; }
-        
+        #chat {
+            background-color: #ffffff;
+        }
+
         /* Chatbot UI Styles */
         #chat-placeholder {
             text-align: center;
@@ -472,12 +827,14 @@
             border-radius: 0.75rem;
             border: 2px dashed #D1D5DB;
         }
+
         #chat-placeholder svg {
             width: 3rem;
             height: 3rem;
             margin: auto;
             color: #9CA3AF;
         }
+
         #chat-placeholder p {
             margin-top: 1rem;
             font-size: 1.125rem;
@@ -485,19 +842,25 @@
         }
 
         #chat-ui {
-            max-width: 48rem; /* max-w-3xl */
+            max-width: 48rem;
+            /* max-w-3xl */
             margin-left: auto;
             margin-right: auto;
-            background-color: #ffffff; /* New: white bg */
-            border-radius: 0.75rem; /* rounded-lg */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 1px solid #E5E7EB; /* border-gray-200 */
+            background-color: #ffffff;
+            /* New: white bg */
+            border-radius: 0.75rem;
+            /* rounded-lg */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            /* border-gray-200 */
             display: flex;
             flex-direction: column;
-            height: 60vh; /* Set a fixed height for the chat window */
-            overflow: hidden; /* Hide rounded corners */
+            height: 60vh;
+            /* Set a fixed height for the chat window */
+            overflow: hidden;
+            /* Hide rounded corners */
         }
-        
+
         #chat-history {
             flex-grow: 1;
             padding: 1.5rem;
@@ -505,15 +868,18 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            background-color: #F9FAFB; /* bg-gray-50 */
+            background-color: #F9FAFB;
+            /* bg-gray-50 */
         }
-        
+
         .chat-message {
             padding: 0.75rem 1rem;
-            border-radius: 1rem; /* More rounded */
+            border-radius: 1rem;
+            /* More rounded */
             max-width: 80%;
             line-height: 1.6;
         }
+
         /* NEW: Chat message image */
         .chat-message img {
             width: 100%;
@@ -521,27 +887,67 @@
             border-radius: 0.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .chat-user {
             background: linear-gradient(to right, #2563EB, #3B82F6);
             color: #ffffff;
             align-self: flex-end;
             border-bottom-right-radius: 0.25rem;
         }
-        
+
         .chat-bot {
-            background-color: #E5E7EB; /* bg-gray-200 */
+            background-color: #E5E7EB;
+            /* bg-gray-200 */
             color: #1F2937;
             align-self: flex-start;
             border-bottom-left-radius: 0.25rem;
+            position: relative;
+            /* For listen button */
+            padding-right: 3rem;
+            /* Space for the button */
         }
-        
+
+        /* NEW: Chat Listen Button */
+        .chat-listen-btn {
+            background-color: #F3F4F6;
+            color: #3B82F6;
+            border: none;
+            border-radius: 9999px;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .chat-listen-btn:hover {
+            background-color: #E5E7EB;
+        }
+
+        .chat-listen-btn.is-playing {
+            background-color: #FEF2F2;
+            color: #EF4444;
+        }
+
+        .chat-listen-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+
         .chat-bot.typing {
             color: #6B7280;
             font-style: italic;
             background-color: transparent;
+            padding-right: 1rem;
+            /* No button on typing */
         }
-        
+
         /* Chat form inside the chat UI */
         #chat-form-container {
             padding: 1rem;
@@ -549,7 +955,7 @@
             background-color: #ffffff;
             position: relative;
         }
-        
+
         /* NEW: Chat Attachment Preview */
         #chat-preview-container {
             padding: 0.5rem;
@@ -560,12 +966,14 @@
             align-items: center;
             justify-content: space-between;
         }
+
         #chat-preview-container img {
             width: 40px;
             height: 40px;
             border-radius: 0.25rem;
             object-fit: cover;
         }
+
         #chat-preview-container span {
             font-size: 0.875rem;
             font-weight: 500;
@@ -573,6 +981,7 @@
             margin-left: 0.5rem;
             flex-grow: 1;
         }
+
         #chat-remove-preview {
             background: none;
             border: none;
@@ -582,12 +991,12 @@
             line-height: 1;
         }
 
-        #chat-form { 
-            display: flex; 
-            gap: 0.5rem; 
+        #chat-form {
+            display: flex;
+            gap: 0.5rem;
             align-items: center;
         }
-        
+
         /* NEW: Chat Icon Buttons */
         .chat-icon-btn {
             background: none;
@@ -601,35 +1010,58 @@
             justify-content: center;
             transition: all 0.2s ease;
         }
+
         .chat-icon-btn:hover {
             background-color: #F3F4F6;
             color: #111827;
         }
+
         .chat-icon-btn svg {
             width: 1.25rem;
             height: 1.25rem;
         }
+
         /* NEW: Mic listening state */
         #mic-btn.is-listening {
-            color: #EF4444; /* red-500 */
-            background-color: #FEF2F2; /* red-50 */
+            color: #EF4444;
+            /* red-500 */
+            background-color: #FEF2F2;
+            /* red-50 */
             animation: pulse 1.5s infinite;
         }
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
-        #chat-input { 
-            flex-grow: 1; 
-            padding: 0.75rem 1rem; 
-            border-radius: 0.5rem; 
-            border: 1px solid #D1D5DB; 
-            outline: none; font-size: 1rem; 
-            transition: border-color 0.15s ease, box-shadow 0.15s ease; 
+        #chat-input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #D1D5DB;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-        #chat-input:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #BFDBFE; }
-        #chat-submit { padding-left: 1.5rem; padding-right: 1.5rem; border-radius: 0.5rem; }
+
+        #chat-input:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px #BFDBFE;
+        }
+
+        #chat-submit {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-radius: 0.5rem;
+        }
 
         /* Chat Suggestion Chips */
         #chat-suggestions {
@@ -638,8 +1070,10 @@
             gap: 0.5rem;
             justify-content: center;
             max-width: 48rem;
-            margin: -2rem auto 2rem auto; /* Sits between header and chat UI */
+            margin: -2rem auto 2rem auto;
+            /* Sits between header and chat UI */
         }
+
         .suggestion-chip {
             background-color: #fff;
             border: 1px solid #D1D5DB;
@@ -651,6 +1085,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
+
         .suggestion-chip:hover {
             background-color: #F9FAFB;
             border-color: #3B82F6;
@@ -659,38 +1094,149 @@
 
 
         /* --- About Section --- */
-        #about { background-color: #F9FAFB; }
-        #about .grid-container { display: flex; flex-direction: column; align-items: center; gap: 3rem; }
-        #about .text-content h2 { font-size: 1.875rem; font-weight: 700; color: #111827; }
-        #about .text-content p { margin-top: 1.5rem; font-size: 1.125rem; color: #4B5563; }
-        #about .text-content p + p { margin-top: 1rem; color: #4B5563; }
-        .image-placeholder-wrapper { background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid #E5E7EB; padding: 2rem; width: 100%; }
-        .image-placeholder { padding-bottom: 56.25%; position: relative; background-color: #3B82F6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: #ffffff; }
-        .image-placeholder svg { width: 5rem; height: 5rem; opacity: 0.75; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .image-placeholder-wrapper p { text-align: center; margin-top: 1rem; color: #6B7280; font-style: italic; }
+        #about {
+            background-color: #F9FAFB;
+        }
+
+        #about .grid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        #about .text-content h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        #about .text-content p {
+            margin-top: 1.5rem;
+            font-size: 1.125rem;
+            color: #4B5563;
+        }
+
+        #about .text-content p+p {
+            margin-top: 1rem;
+            color: #4B5563;
+        }
+
+        .image-placeholder-wrapper {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .image-placeholder {
+            padding-bottom: 56.25%;
+            position: relative;
+            background-color: #3B82F6;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .image-placeholder svg {
+            width: 5rem;
+            height: 5rem;
+            opacity: 0.75;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .image-placeholder-wrapper p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #6B7280;
+            font-style: italic;
+        }
 
         /* --- Contact Section --- */
-        #contact { background-color: #ffffff; }
-        .form-container { max-width: 42rem; margin-left: auto; margin-right: auto; }
-        #contact-success { 
-            padding: 1rem; 
-            margin-bottom: 1.5rem; 
-            border-radius: 0.5rem; 
-            background-color: #F0FDF4; /* NEW: Green */
-            border: 1px solid #DCFCE7; 
-            color: #15803D; /* NEW: Green */
+        #contact {
+            background-color: #ffffff;
         }
-        #contact-success p:first-child { font-weight: 500; }
-        #contact-form { background-color: #ffffff; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 20px 30px rgba(0,0,0,0.08); border: 1px solid #F3F4F6; display: grid; gap: 1.5rem; }
-        #contact-form label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
-        #contact-form input, #contact-form textarea { width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #D1D5DB; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
-        #contact-form input:focus, #contact-form textarea:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #BFDBFE; }
-        #contact-form button { width: 100%; border: none; cursor: pointer; }
+
+        .form-container {
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #contact-success {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #F0FDF4;
+            /* NEW: Green */
+            border: 1px solid #DCFCE7;
+            color: #15803D;
+            /* NEW: Green */
+        }
+
+        #contact-success p:first-child {
+            font-weight: 500;
+        }
+
+        #contact-form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #F3F4F6;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        #contact-form label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #D1D5DB;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px #BFDBFE;
+        }
+
+        #contact-form button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+        }
 
         /* --- Footer --- */
-        footer { background-color: #1F2937; color: #9CA3AF; padding-top: 3rem; padding-bottom: 3rem; }
-        footer .container { text-align: center; }
-        
+        footer {
+            background-color: #1F2937;
+            color: #9CA3AF;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        footer .container {
+            text-align: center;
+        }
+
         /* --- Camera Modal --- */
         .camera-overlay {
             position: fixed;
@@ -705,6 +1251,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .camera-modal {
             background-color: #fff;
             padding: 1.5rem;
@@ -713,27 +1260,32 @@
             width: 90%;
             max-width: 500px;
         }
+
         .camera-modal h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
+
         #video-feed {
             width: 100%;
             height: auto;
             border-radius: 0.5rem;
             background-color: #000;
         }
+
         #capture-canvas {
             width: 100%;
             height: auto;
             border-radius: 0.5rem;
         }
+
         .modal-buttons {
             display: flex;
             gap: 0.75rem;
             margin-top: 1rem;
         }
+
         .modal-buttons .btn {
             width: 100%;
         }
@@ -741,23 +1293,66 @@
 
         /* --- Media Queries (Mobile-First) --- */
         @media (min-width: 640px) {
-            #home .button-group { flex-direction: row; row-gap: 0; column-gap: 1rem; }
+            #home .button-group {
+                flex-direction: row;
+                row-gap: 0;
+                column-gap: 1rem;
+            }
         }
+
         @media (min-width: 768px) {
-            .nav-links { display: flex; }
-            #mobile-menu-btn { display: none; }
-            #home { padding-top: 8rem; padding-bottom: 9rem; }
-            #home h1 { font-size: 3.75rem; line-height: 1; }
-            #home .subtitle { font-size: 1.25rem; }
-            section { padding-top: 7rem; padding-bottom: 7rem; }
-            .section-header h2 { font-size: 2.25rem; }
-            #about .grid-container { flex-direction: row; gap: 4rem; }
-            #about .text-content, #about .image-placeholder-wrapper { width: 50%; }
-            #about .text-content h2 { font-size: 2.25rem; }
-            #contact-form { padding: 2.5rem; }
+            .nav-links {
+                display: flex;
+            }
+
+            #mobile-menu-btn {
+                display: none;
+            }
+
+            #home {
+                padding-top: 8rem;
+                padding-bottom: 9rem;
+            }
+
+            #home h1 {
+                font-size: 3.75rem;
+                line-height: 1;
+            }
+
+            #home .subtitle {
+                font-size: 1.25rem;
+            }
+
+            section {
+                padding-top: 7rem;
+                padding-bottom: 7rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.25rem;
+            }
+
+            #about .grid-container {
+                flex-direction: row;
+                gap: 4rem;
+            }
+
+            #about .text-content,
+            #about .image-placeholder-wrapper {
+                width: 50%;
+            }
+
+            #about .text-content h2 {
+                font-size: 2.25rem;
+            }
+
+            #contact-form {
+                padding: 2.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -766,17 +1361,21 @@
             <a href="#home" class="logo">
                 <!-- NEW SVG LOGO -->
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="14" cy="14" r="14" fill="url(#logo-gradient)"/>
-                    <path d="M14 2.8C13.1 2.8 12.27 3.01 11.5 3.4L11.45 3.43C6.44 5.8 4.2 11.41 5.14 16.66C5.83 20.72 9.4 24.22 13.78 25.15C13.85 25.17 13.92 25.18 14 25.18C14.08 25.18 14.15 25.17 14.22 25.15C18.6 24.22 22.17 20.72 22.86 16.66C23.8 11.41 21.56 5.8 16.55 3.43L16.5 3.4C15.73 3.01 14.9 2.8 14 2.8Z" fill="white" fill-opacity="0.3"/>
-                    <path d="M12.04 18.5L8.25 14.71L9.66 13.3L12.04 15.68L18.34 9.38L19.75 10.79L12.04 18.5Z" fill="white"/>
+                    <rect width="28" height="28" rx="14" fill="url(#logo-gradient)" />
+                    <path d="M11 11H17V17H11V11Z" fill="white" fill-opacity="0.2" />
+                    <path d="M7 7H13V13H7V7Z" fill="white" fill-opacity="0.4" />
+                    <path d="M11 7H17V13H11V7Z" fill="white" fill-opacity="0.6" />
+                    <path d="M15 11H21V17H15V11Z" fill="white" fill-opacity="0.4" />
+                    <path d="M11 15H17V21H11V15Z" fill="white" fill-opacity="0.6" />
+                    <path d="M7 15H13V21H7V15Z" fill="white" fill-opacity="0.4" />
                     <defs>
-                    <linearGradient id="logo-gradient" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#3B82F6"/>
-                    <stop offset="1" stop-color="#2563EB"/>
-                    </linearGradient>
+                        <linearGradient id="logo-gradient" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6" />
+                            <stop offset="1" stop-color="#2563EB" />
+                        </linearGradient>
                     </defs>
                 </svg>
-                Device<span>DigiHelp</span>
+                <span>Device<span id="d">DigiHelp</span></span>
             </a>
             <div class="nav-links">
                 <a href="#home" class="nav-link" data-section="home">Home</a>
@@ -788,7 +1387,10 @@
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
             <button id="mobile-menu-btn" aria-label="Open mobile menu">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
             </button>
         </nav>
         <div id="mobile-menu">
@@ -808,7 +1410,8 @@
         <section id="home">
             <div class="container">
                 <h1>Instant Manuals, Expert Help</h1>
-                <p class="subtitle">Confused by a device? Upload its photo, search by name, or ask our new chatbot for help.</p>
+                <p class="subtitle">Confused by a device? Upload its photo, search by name, or ask our new chatbot for
+                    help.</p>
                 <p class="tagline">AI-powered device guides at your fingertips.</p>
                 <div class="button-group">
                     <a href="#generator" class="btn btn-primary">Try the AI Generator</a>
@@ -822,10 +1425,17 @@
             <div class="container">
                 <div class="section-header">
                     <h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 .75.75v5.5a2.75 2.75 0 0 1-2.75 2.75H6.75A2.75 2.75 0 0 1 4 17.75v-5.5z"></path><path d="M16 12.5V6.75C16 5.23 14.77 4 13.25 4H10.75C9.23 4 8 5.23 8 6.75V12.5"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M4 12.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 .75.75v5.5a2.75 2.75 0 0 1-2.75 2.75H6.75A2.75 2.75 0 0 1 4 17.75v-5.5z">
+                            </path>
+                            <path d="M16 12.5V6.75C16 5.23 14.77 4 13.25 4H10.75C9.23 4 8 5.23 8 6.75V12.5"></path>
+                        </svg>
                         AI Instant Device Manuals
                     </h2>
-                    <p>Upload a picture of any device, and our AI will identify it and generate a "how-to" guide for you.</p>
+                    <p>Upload a picture of any device, and our AI will identify it and generate a "how-to" guide for
+                        you.</p>
                 </div>
                 <div class="grid-container">
                     <!-- Upload Area -->
@@ -836,22 +1446,37 @@
                             <input type="file" id="file-input" class="hidden" accept="image/*">
                             <div id="drop-zone-buttons">
                                 <button id="upload-btn" class="btn btn-secondary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
                                     Upload File
                                 </button>
                                 <button id="camera-btn" class="btn btn-secondary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                        <path
+                                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                        </path>
+                                        <circle cx="12" cy="13" r="4"></circle>
+                                    </svg>
                                     Use Camera
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div id="image-preview-container" class="hidden">
                             <p>Your Image:</p>
                             <img id="image-preview" src="" alt="Image Preview">
                             <button id="remove-image">&times; Remove Image</button>
                         </div>
-                        
+
                         <!-- Language Selector -->
                         <div id="language-selector">
                             <label for="language-select">Select Language:</label>
@@ -870,7 +1495,8 @@
                         </div>
 
                         <!-- Generate Button -->
-                        <button id="generate-btn" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" disabled>
+                        <button id="generate-btn" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;"
+                            disabled>
                             Generate Manual
                         </button>
                     </div>
@@ -878,16 +1504,29 @@
                     <!-- Output Area -->
                     <div class="card output-area">
                         <h3>2. Get Your Manual</h3>
-                        
+
                         <!-- TTS Button -->
                         <button id="tts-button" class="hidden" aria-label="Listen to manual">
-                            <svg id="tts-icon-play" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M17.657 6.343a9 9 0 010 12.728M9 19V5l7 7-7 7z"></path></svg>
-                            <svg id="tts-icon-stop" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg id="tts-icon-play" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.536 8.464a5 5 0 010 7.072M17.657 6.343a9 9 0 010 12.728M9 19V5l7 7-7 7z">
+                                </path>
+                            </svg>
+                            <svg id="tts-icon-stop" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                         </button>
-                        
+
                         <!-- Download Button -->
                         <button id="download-btn" class="hidden" aria-label="Download manual">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
                         </button>
 
                         <div id="output-scroll-wrapper">
@@ -900,7 +1539,12 @@
                                 <p id="error-text">Could not generate the manual. Please try again.</p>
                             </div>
                             <div id="output-placeholder" class="placeholder-or-loader">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
                                 <p>Your generated manual will appear here.</p>
                             </div>
                             <div id="output-content" class="hidden">
@@ -911,29 +1555,35 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Search Section -->
         <section id="search">
             <div class="container">
                 <div class="section-header">
                     <h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
                         Search by Device Name
                     </h2>
                     <p>
-                        Can't upload an image? Just type the device name or model below to get the same AI-generated manual.
+                        Can't upload an image? Just type the device name or model below to get the same AI-generated
+                        manual.
                     </p>
                 </div>
 
                 <div id="search-form-container">
                     <form id="search-form">
-                        <input type="text" id="search-input" placeholder="e.g., 'iPhone 15 Pro' or 'Samsung QLED TV'" required>
+                        <input type="text" id="search-input" placeholder="e.g., 'iPhone 15 Pro' or 'Samsung QLED TV'"
+                            required>
                         <button type="submit" id="search-submit" class="btn btn-primary">Search</button>
                     </form>
                 </div>
             </div>
         </section>
-        
+
         <!-- Community Tips Section (MOVED) -->
         <section id="tips-section" class="hidden">
             <div class="container">
@@ -945,131 +1595,151 @@
                     <!-- Generic Tips -->
                     <div id="tips-generic">
                         <div class="tip">
-                            <p class="tip-body">"I found that wiping it down with a microfiber cloth works best for cleaning."</p>
+                            <p class="tip-body">"I found that wiping it down with a microfiber cloth works best for
+                                cleaning."</p>
                             <span class="tip-author">- Alex P.</span>
                         </div>
                         <div class="tip">
-                            <p class="tip-body">"Don't forget to check for software updates! Mine got new features last week."</p>
+                            <p class="tip-body">"Don't forget to check for software updates! Mine got new features last
+                                week."</p>
                             <span class="tip-author">- Maria G.</span>
                         </div>
                     </div>
                     <!-- iPhone Tips -->
                     <div id="tips-iphone" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Double-tapping the back of the phone can be set up as a shortcut. Go to Settings > Accessibility > Touch > Back Tap."</p>
+                            <p class="tip-body">"Double-tapping the back of the phone can be set up as a shortcut. Go to
+                                Settings > Accessibility > Touch > Back Tap."</p>
                             <span class="tip-author">- TechieTom</span>
                         </div>
                         <div class="tip">
-                            <p class="tip-body">"If your battery is draining fast, check 'Battery Health' in settings. Also, see what apps are using the most power."</p>
+                            <p class="tip-body">"If your battery is draining fast, check 'Battery Health' in settings.
+                                Also, see what apps are using the most power."</p>
                             <span class="tip-author">- Sarah K.</span>
                         </div>
                     </div>
                     <!-- Fridge Tips -->
                     <div id="tips-fridge" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Change the water filter every 6 months! The 'replace filter' light is easy to ignore, but it makes a huge difference for ice."</p>
+                            <p class="tip-body">"Change the water filter every 6 months! The 'replace filter' light is
+                                easy to ignore, but it makes a huge difference for ice."</p>
                             <span class="tip-author">- David R.</span>
                         </div>
                         <div class="tip">
-                            <p class="tip-body">"I use the 'Power Cool' function after loading groceries to cool them down fast."</p>
+                            <p class="tip-body">"I use the 'Power Cool' function after loading groceries to cool them
+                                down fast."</p>
                             <span class="tip-author">- Emily B.</span>
                         </div>
                     </div>
                     <!-- NEW: Printer Tips -->
                     <div id="tips-printer" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"To save ink, always print in 'Draft' mode for documents that aren't for a final presentation. It's a lifesaver!"</p>
+                            <p class="tip-body">"To save ink, always print in 'Draft' mode for documents that aren't for
+                                a final presentation. It's a lifesaver!"</p>
                             <span class="tip-author">- PrintMaster</span>
                         </div>
                     </div>
                     <!-- NEW: TV Tips -->
                     <div id="tips-tv" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Go into the settings and turn off 'Motion Smoothing' (sometimes called 'TruMotion'). It makes movies look much better and less like a soap opera."</p>
+                            <p class="tip-body">"Go into the settings and turn off 'Motion Smoothing' (sometimes called
+                                'TruMotion'). It makes movies look much better and less like a soap opera."</p>
                             <span class="tip-author">- Cinephile88</span>
                         </div>
                     </div>
                     <!-- NEW: Washing Machine Tips -->
                     <div id="tips-washing-machine" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Don't just guess with detergent! Too much can leave residue. I found that one tablespoon of liquid is enough for most loads."</p>
+                            <p class="tip-body">"Don't just guess with detergent! Too much can leave residue. I found
+                                that one tablespoon of liquid is enough for most loads."</p>
                             <span class="tip-author">- CleanFreak</span>
                         </div>
                     </div>
                     <!-- NEW: Laptop Tips -->
                     <div id="tips-laptop" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"To quickly improve performance, check your 'Startup Apps' in Task Manager and disable anything you don't need."</p>
+                            <p class="tip-body">"To quickly improve performance, check your 'Startup Apps' in Task
+                                Manager and disable anything you don't need."</p>
                             <span class="tip-author">- LappyFan</span>
                         </div>
                     </div>
                     <!-- NEW: Tablet Tips -->
                     <div id="tips-tablet" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Get a good screen protector and a case that doubles as a stand. It makes watching videos so much better."</p>
+                            <p class="tip-body">"Get a good screen protector and a case that doubles as a stand. It
+                                makes watching videos so much better."</p>
                             <span class="tip-author">- MediaManiac</span>
                         </div>
                     </div>
                     <!-- NEW: PC Tips -->
                     <div id="tips-pc" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Don't forget to clean the dust filters on your PC case every few months. It keeps it running cool and quiet."</p>
+                            <p class="tip-body">"Don't forget to clean the dust filters on your PC case every few
+                                months. It keeps it running cool and quiet."</p>
                             <span class="tip-author">- PCBuilder</span>
                         </div>
                     </div>
                     <!-- NEW: Smartwatch Tips -->
                     <div id="tips-smartwatch" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"To save battery, I use a simple watch face with a black background."</p>
+                            <p class="tip-body">"To save battery, I use a simple watch face with a black background."
+                            </p>
                             <span class="tip-author">- WatchFan</span>
                         </div>
                     </div>
                     <!-- NEW: Camera Tips -->
                     <div id="tips-camera" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Always shoot in RAW format if you plan on editing your photos later. It gives you so much more flexibility."</p>
+                            <p class="tip-body">"Always shoot in RAW format if you plan on editing your photos later. It
+                                gives you so much more flexibility."</p>
                             <span class="tip-author">- Shutterbug</span>
                         </div>
                     </div>
                     <!-- NEW: Audio Tips -->
                     <div id="tips-audio" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"For Bluetooth speakers, always check for a firmware update via the manufacturer's app. It can sometimes improve audio quality!"</p>
+                            <p class="tip-body">"For Bluetooth speakers, always check for a firmware update via the
+                                manufacturer's app. It can sometimes improve audio quality!"</p>
                             <span class="tip-author">- AudioPhile</span>
                         </div>
                     </div>
                     <!-- NEW: Smart Home Tips -->
                     <div id="tips-smart-home" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Create a 'Good Morning' routine on your smart speaker. Mine turns on the lights, reads the news, and starts the coffee machine."</p>
+                            <p class="tip-body">"Create a 'Good Morning' routine on your smart speaker. Mine turns on
+                                the lights, reads the news, and starts the coffee machine."</p>
                             <span class="tip-author">- HomeAuto</span>
                         </div>
                     </div>
                     <!-- NEW: Networking Tips -->
                     <div id="tips-networking" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"If your Wi-Fi is slow, try restarting your router. If that doesn't work, try changing the Wi-Fi channel in the router settings."</p>
+                            <p class="tip-body">"If your Wi-Fi is slow, try restarting your router. If that doesn't
+                                work, try changing the Wi-Fi channel in the router settings."</p>
                             <span class="tip-author">- NetAdmin</span>
                         </div>
                     </div>
                     <!-- NEW: Kitchen Tips -->
                     <div id="tips-kitchen" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"For microwaves: never use metal! And cover your food with a paper towel to prevent splatters."</p>
+                            <p class="tip-body">"For microwaves: never use metal! And cover your food with a paper towel
+                                to prevent splatters."</p>
                             <span class="tip-author">- ChefMike</span>
                         </div>
                     </div>
                     <!-- NEW: Health Tips -->
                     <div id="tips-health" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"For blood pressure monitors, make sure you sit still and quiet for 5 minutes before taking a reading. Don't cross your legs!"</p>
+                            <p class="tip-body">"For blood pressure monitors, make sure you sit still and quiet for 5
+                                minutes before taking a reading. Don't cross your legs!"</p>
                             <span class="tip-author">- NurseJoy</span>
                         </div>
                     </div>
                     <!-- NEW: Game Tips -->
                     <div id="tips-gaming" class="hidden">
                         <div class="tip">
-                            <p class="tip-body">"Make sure your console has enough space around it for air to flow. Overheating is the number one enemy of consoles!"</p>
+                            <p class="tip-body">"Make sure your console has enough space around it for air to flow.
+                                Overheating is the number one enemy of consoles!"</p>
                             <span class="tip-author">- GamerX</span>
                         </div>
                     </div>
@@ -1082,7 +1752,11 @@
             <div class="container">
                 <div class="section-header">
                     <h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
                         Top Uploaded Devices
                     </h2>
                     <p class="updated-note">Updated weekly based on community uploads</p>
@@ -1093,117 +1767,191 @@
                     <div class="library-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
                                 <h4>Mobile & Personal Devices</h4>
                             </div>
                             <p>Smartphones, Tablets, Smartwatches, Earbuds, Power Banks...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Apple iPhone 15 Pro">View iPhone Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="Apple iPhone 15 Pro">View
+                                iPhone Manual</button>
                         </div>
                     </div>
                     <!-- Card 2 -->
                     <div class="library-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
                                 <h4>Computers & Accessories</h4>
                             </div>
                             <p>Laptops, Desktops, Monitors, Keyboards, Printers, Scanners...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Dell XPS 15 Laptop">View Laptop Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="Dell XPS 15 Laptop">View Laptop
+                                Manual</button>
                         </div>
                     </div>
                     <!-- Card 3 -->
                     <div class="library-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                    </path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
                                 <h4>Cameras & Imaging</h4>
                             </div>
                             <p>Digital Cameras, Action Cams (GoPro), Drones, Projectors...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="GoPro Hero 12 Black">View Camera Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="GoPro Hero 12 Black">View
+                                Camera Manual</button>
                         </div>
                     </div>
                     <!-- Card 4 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"></path><line x1="2" y1="20" x2="2" y2="20"></line></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6">
+                                    </path>
+                                    <line x1="2" y1="20" x2="2" y2="20"></line>
+                                </svg>
                                 <h4>TVs & Smart Home</h4>
                             </div>
                             <p>Smart TVs, Streaming Sticks, Smart Speakers, Smart Lights, Doorbells...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Amazon Fire TV Stick 4K">View Smart TV Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="Amazon Fire TV Stick 4K">View
+                                Smart TV Manual</button>
                         </div>
                     </div>
                     <!-- Card 5 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none" fill="none"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-8H3v8z" /><path d="M3 11V5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" /><path d="M14 15m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M6 6h1.01" /><path d="M9 6h1.01" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M0 0h24v24H0z" stroke="none" fill="none" />
+                                    <path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-8H3v8z" />
+                                    <path d="M3 11V5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" />
+                                    <path d="M14 15m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M6 6h1.01" />
+                                    <path d="M9 6h1.01" />
+                                </svg>
                                 <h4>Home & Kitchen Appliances</h4>
                             </div>
                             <p>Microwaves, Refrigerators, Washing Machines, Coffee Machines...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Samsung Microwave Oven">View Microwave Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="Samsung Microwave Oven">View
+                                Microwave Manual</button>
                         </div>
                     </div>
                     <!-- Card 6 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16.09 13.5 4.15-4.15-2.83-2.83-4.15 4.15"></path><path d="M10.03 20.2a2.12 2.12 0 0 1-3 0l-5.3-5.3a2.12 2.12 0 0 1 0-3L10.8 2.8a2.12 2.12 0 0 1 3 0l5.3 5.3a2.12 2.12 0 0 1 0 3l-8.24 8.24"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m16.09 13.5 4.15-4.15-2.83-2.83-4.15 4.15"></path>
+                                    <path
+                                        d="M10.03 20.2a2.12 2.12 0 0 1-3 0l-5.3-5.3a2.12 2.12 0 0 1 0-3L10.8 2.8a2.12 2.12 0 0 1 3 0l5.3 5.3a2.12 2.12 0 0 1 0 3l-8.24 8.24">
+                                    </path>
+                                </svg>
                                 <h4>Game Consoles & Misc.</h4>
                             </div>
                             <p>PlayStation, Xbox, Nintendo Switch, VR Headsets, Drones...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="PlayStation 5 Console">View Gaming Manual</button>
+                            <button class="btn btn-primary library-view-btn" data-query="PlayStation 5 Console">View
+                                Gaming Manual</button>
                         </div>
                     </div>
                     <!-- Card 7 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12V2H19V12"></path><path d="M2 12H22"></path><path d="M5 12H2V22H10V12"></path><path d="M19 12H14V22H22V12"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 12V2H19V12"></path>
+                                    <path d="M2 12H22"></path>
+                                    <path d="M5 12H2V22H10V12"></path>
+                                    <path d="M19 12H14V22H22V12"></path>
+                                </svg>
                                 <h4>Audio & Entertainment</h4>
                             </div>
                             <p>Bluetooth Speakers, Home Theater Systems, Soundbars, Microphones...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Sony WH-1000XM5 Headphones">View Audio Manual</button>
+                            <button class="btn btn-primary library-view-btn"
+                                data-query="Sony WH-1000XM5 Headphones">View Audio Manual</button>
                         </div>
                     </div>
                     <!-- Card 8 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12s-4-2.4-4-5.2c0-2.1 1.7-3.8 3.8-3.8h.4C14.3 3 16 4.7 16 6.8c0 2.8-4 5.2-4 5.2z"></path><path d="M12 12v4.8"></path><path d="M12 22s-4-2.4-4-5.2c0-2.1 1.7-3.8 3.8-3.8h.4c2.1 0 3.8 1.7 3.8 3.8 0 2.8-4 5.2-4 5.2z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M12 12s-4-2.4-4-5.2c0-2.1 1.7-3.8 3.8-3.8h.4C14.3 3 16 4.7 16 6.8c0 2.8-4 5.2-4 5.2z">
+                                    </path>
+                                    <path d="M12 12v4.8"></path>
+                                    <path
+                                        d="M12 22s-4-2.4-4-5.2c0-2.1 1.7-3.8 3.8-3.8h.4c2.1 0 3.8 1.7 3.8 3.8 0 2.8-4 5.2-4 5.2z">
+                                    </path>
+                                </svg>
                                 <h4>Health & Fitness Gadgets</h4>
                             </div>
                             <p>Blood Pressure Monitors, Glucometers, Smart Scales, Massagers...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="Omron Blood Pressure Monitor">View Health Manual</button>
+                            <button class="btn btn-primary library-view-btn"
+                                data-query="Omron Blood Pressure Monitor">View Health Manual</button>
                         </div>
                     </div>
                     <!-- Card 9 (Hidden) -->
                     <div class="library-card hidden-card">
                         <div class="library-card-content">
                             <div class="library-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path><line x1="12" y1="2" x2="12" y2="2"></line><line x1="12" y1="6" x2="12" y2="6"></line></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                    <line x1="12" y1="2" x2="12" y2="2"></line>
+                                    <line x1="12" y1="6" x2="12" y2="6"></line>
+                                </svg>
                                 <h4>Networking & Office</h4>
                             </div>
                             <p>Wi-Fi Routers, Modems, Network Extenders, IP Cameras, UPS...</p>
                         </div>
                         <div class="library-card-footer">
-                            <button class="btn btn-primary library-view-btn" data-query="TP-Link Archer AXE75 Router">View Router Manual</button>
+                            <button class="btn btn-primary library-view-btn"
+                                data-query="TP-Link Archer AXE75 Router">View Router Manual</button>
                         </div>
                     </div>
                 </div>
@@ -1221,7 +1969,10 @@
             <div class="container">
                 <div class="section-header">
                     <h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
                         Device Chatbot
                     </h2>
                     <p>After you generate a manual, you can ask follow-up questions about your device right here.</p>
@@ -1229,10 +1980,15 @@
 
                 <!-- Chat UI -->
                 <div id="chat-placeholder">
-                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1.5-1.5M9 17h6M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 9a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V9z"></path></svg>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9.75 17L9 20l-1.5-1.5M9 17h6M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 9a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V9z"></path>
+                    </svg>
                     <p>Please generate a manual first to activate the chat.</p>
                 </div>
-                
+
                 <!-- Chat Suggestions -->
                 <div id="chat-suggestions" class="hidden">
                     <!-- Generic Suggestions -->
@@ -1302,7 +2058,7 @@
                         <button class="suggestion-chip">Common error codes</button>
                     </div>
                 </div>
-                
+
                 <div id="chat-ui" class="hidden">
                     <div id="chat-history">
                         <!-- Chat messages will be added here -->
@@ -1318,10 +2074,22 @@
                             <!-- NEW: Chat icon buttons -->
                             <input type="file" id="chat-file-input" class="hidden" accept="image/*">
                             <button type="button" id="chat-attach-btn" class="chat-icon-btn" aria-label="Attach image">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                                    </path>
+                                </svg>
                             </button>
                             <button type="button" id="mic-btn" class="chat-icon-btn" aria-label="Use voice input">
-                                <svg id="mic-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
+                                <svg id="mic-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                </svg>
                             </button>
                             <input type="text" id="chat-input" placeholder="Ask a follow-up question..." required>
                             <button type="submit" id="chat-submit" class="btn btn-primary">Send</button>
@@ -1336,12 +2104,20 @@
             <div class="container grid-container">
                 <div class="text-content">
                     <h2>About DeviceDigiHelp</h2>
-                    <p>We believe technology should be easy for everyone. DeviceDigiHelp started with a simple idea: what if you could just point at a device and know how to use it?</p>
-                    <p>Using powerful AI, we've made that a reality. But we're more than just software. We're a team of patient tech experts, and problem-solvers dedicated to ending tech frustration. Whether you use our instant AI generator or chat with our team, we're here to help you feel confident with your devices.</p>
+                    <p>We believe technology should be easy for everyone. DeviceDigiHelp started with a simple idea:
+                        what if you could just point at a device and know how to use it?</p>
+                    <p>Using powerful AI, we've made that a reality. But we're more than just software. We're a team of
+                        patient tech experts, and problem-solvers dedicated to ending tech frustration. Whether you use
+                        our instant AI generator or chat with our team, we're here to help you feel confident with your
+                        devices.</p>
                 </div>
                 <div class="image-placeholder-wrapper">
                     <div class="image-placeholder">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
                     </div>
                     <p>Our team and AI, working to help you.</p>
                 </div>
@@ -1353,7 +2129,12 @@
             <div class="container">
                 <div class="section-header">
                     <h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                         Get in Touch
                     </h2>
                     <p>Have questions about our services or need help with a device? Send us a message!</p>
@@ -1374,7 +2155,8 @@
                         </div>
                         <div>
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+                            <textarea id="message" name="message" rows="5" required
+                                placeholder="How can we help?"></textarea>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Send Message</button>
@@ -1391,7 +2173,7 @@
             <p>&copy; 2025 DeviceDigiHelp. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <!-- NEW: Camera Modal -->
     <div id="camera-overlay" class="camera-overlay hidden">
         <div class="camera-modal">
@@ -1407,7 +2189,8 @@
                 <button id="retake-btn" class="btn btn-secondary hidden">Retake</button>
                 <button id="use-image-btn" class="btn btn-primary hidden">Use this Image</button>
             </div>
-             <button id="close-camera-btn" style="background:none; border:none; color:#4B5563; cursor:pointer; margin-top:1rem; width:100%;">Cancel</button>
+            <button id="close-camera-btn"
+                style="background:none; border:none; color:#4B5563; cursor:pointer; margin-top:1rem; width:100%;">Cancel</button>
         </div>
     </div>
 
@@ -1468,14 +2251,14 @@
             inputElement.style.border = '1px solid #DC2626'; // Red border
             setTimeout(() => inputElement.style.border = '', 3000);
         }
-        
+
         // --- Chatbot Elements ---
         const chatPlaceholder = document.getElementById('chat-placeholder');
         const chatUi = document.getElementById('chat-ui');
         const chatHistory = document.getElementById('chat-history');
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
-        const chatSuggestions = document.getElementById('chat-suggestions'); 
+        const chatSuggestions = document.getElementById('chat-suggestions');
         const chatAttachBtn = document.getElementById('chat-attach-btn');
         const chatFileInput = document.getElementById('chat-file-input');
         const chatPreviewContainer = document.getElementById('chat-preview-container');
@@ -1483,7 +2266,7 @@
         const chatRemovePreview = document.getElementById('chat-remove-preview');
         const micBtn = document.getElementById('mic-btn');
         let chatFile = null;
-        
+
         let identifiedDevice = null; // This will store the device name
 
         // --- Contact Form ---
@@ -1520,8 +2303,8 @@
         const imagePreview = document.getElementById('image-preview');
         const removeImageBtn = document.getElementById('remove-image');
         const languageSelect = document.getElementById('language-select');
-        const generateBtn = document.getElementById('generate-btn'); 
-        
+        const generateBtn = document.getElementById('generate-btn');
+
         const outputScrollWrapper = document.getElementById('output-scroll-wrapper');
         const loadingSpinner = document.getElementById('loading-spinner');
         const errorMessage = document.getElementById('error-message');
@@ -1529,19 +2312,20 @@
         const outputPlaceholder = document.getElementById('output-placeholder');
         const outputContent = document.getElementById('output-content');
         const communityTips = document.getElementById('tips-section'); // Updated
-        
+
         const ttsButton = document.getElementById('tts-button');
         const ttsIconPlay = document.getElementById('tts-icon-play');
         const ttsIconStop = document.getElementById('tts-icon-stop');
         const downloadBtn = document.getElementById('download-btn');
-        
+
         let file = null;
         let lastGeneratedText = ""; // Store text for TTS
-        
+
         // Using browser's built-in synth
         const synth = window.speechSynthesis;
         let utterance = null;
-        
+        let chatUtterance = null; // Separate utterance for chat
+
         // --- NEW: Camera Modal Elements & Logic ---
         const cameraOverlay = document.getElementById('camera-overlay');
         const videoFeed = document.getElementById('video-feed');
@@ -1572,8 +2356,8 @@
                 if (currentStream) {
                     currentStream.getTracks().forEach(track => track.stop());
                 }
-                currentStream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: 'environment' } 
+                currentStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment' }
                 });
                 videoFeed.srcObject = currentStream;
                 videoFeed.play();
@@ -1584,7 +2368,7 @@
                 captureBtn.classList.add('hidden');
             }
         }
-        
+
         function stopCamera() {
             if (currentStream) {
                 currentStream.getTracks().forEach(track => track.stop());
@@ -1592,20 +2376,20 @@
             }
             cameraOverlay.classList.add('hidden');
         }
-        
+
         captureBtn.addEventListener('click', () => {
             const context = captureCanvas.getContext('2d');
             captureCanvas.width = videoFeed.videoWidth;
             captureCanvas.height = videoFeed.videoHeight;
             context.drawImage(videoFeed, 0, 0, captureCanvas.width, captureCanvas.height);
-            
+
             videoFeed.classList.add('hidden');
             captureCanvas.classList.remove('hidden');
             captureBtn.classList.add('hidden');
             retakeBtn.classList.remove('hidden');
             useImageBtn.classList.remove('hidden');
         });
-        
+
         retakeBtn.addEventListener('click', () => {
             videoFeed.classList.remove('hidden');
             captureCanvas.classList.add('hidden');
@@ -1622,7 +2406,7 @@
             }, 'image/jpeg', 0.9);
         });
 
-        
+
         // --- File Handling ---
         fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
         dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drop-zone-over'); });
@@ -1637,7 +2421,7 @@
             imagePreviewContainer.classList.add('hidden');
             dropZone.classList.remove('hidden');
             resetOutput();
-            generateBtn.disabled = true; 
+            generateBtn.disabled = true;
         });
 
         function handleFile(selectedFile) {
@@ -1649,19 +2433,19 @@
                     imagePreviewContainer.classList.remove('hidden');
                     dropZone.classList.add('hidden');
                     resetOutput();
-                    generateBtn.disabled = false; 
+                    generateBtn.disabled = false;
                 };
                 reader.readAsDataURL(file);
             } else {
                 showError("Please select a valid image file (PNG, JPG, GIF).");
             }
         }
-        
+
         generateBtn.addEventListener('click', generateManualFromImage);
 
         // --- Output State Management ---
         function resetOutput() {
-            stopSpeech(); 
+            stopSpeech();
             loadingSpinner.classList.add('hidden');
             errorMessage.classList.add('hidden');
             outputContent.classList.add('hidden');
@@ -1671,14 +2455,14 @@
             outputPlaceholder.classList.remove('hidden');
             outputContent.innerHTML = '';
             lastGeneratedText = "";
-            
+
             // NEW: Reset chat state
             identifiedDevice = null;
             chatPlaceholder.classList.remove('hidden');
             chatUi.classList.add('hidden');
             chatSuggestions.classList.add('hidden'); // NEW
             chatHistory.innerHTML = '';
-            
+
             // NEW: Hide all dynamic tips/suggestions
             document.querySelectorAll('#tips-section .tips-container > div').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('#chat-suggestions > div').forEach(el => el.classList.add('hidden'));
@@ -1718,30 +2502,30 @@
             let formattedContent = rawText
                 .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // Convert **bold** to <b>bold</b>
                 .replace(/## (.*)/g, '<h3>$1</h3>')
-                .replace(/### (.*)/g, '<h4>$1</h4>') 
+                .replace(/### (.*)/g, '<h4>$1</h4>')
                 .replace(/\* (.*)/g, '<li>$1</li>')
                 .replace(/(\<li>.*<\/li>)/gs, '<ul>$1</ul>')
                 .replace(/\n/g, '<br>')
                 .replace(/<br><br>/g, '<br>')
                 .replace(/<\/ul><br>/g, '</ul>');
-            
+
             // Check if the AI sent HTML or Markdown
             // If it's already HTML (contains <b>), just use it.
             if (rawText.includes("<b>") || rawText.includes("<h3>") || rawText.includes("<ul>")) {
-                 outputContent.innerHTML = rawText;
+                outputContent.innerHTML = rawText;
             } else {
                 // Otherwise, use the Markdown-converted version
                 outputContent.innerHTML = formattedContent;
             }
-            
+
             outputContent.classList.remove('hidden');
             ttsButton.classList.remove('hidden');
             downloadBtn.classList.remove('hidden');
             communityTips.classList.remove('hidden'); // NEW
-            
+
             // 3. Save the *clean* text for the TTS
-            lastGeneratedText = cleanText; 
-            
+            lastGeneratedText = cleanText;
+
             // --- NEW: Activate Chatbot ---
             // Try to find the device name in the first <b> tag
             const deviceNameMatch = rawText.match(/<b>(.*?)<\/b>/);
@@ -1752,7 +2536,7 @@
                 // Fallback: use the first line of clean text
                 extractedName = cleanText.split('.')[0];
             }
-            
+
             // Clean up the extracted name
             identifiedDevice = extractedName
                 .replace('This appears to be an ', '')
@@ -1760,31 +2544,31 @@
                 .replace('Here is the guide for ', '') // Just in case
                 .replace(/\.$/, '') // Remove trailing period
                 .trim();
-            
-            
+
+
             // Show the chat UI
             chatPlaceholder.classList.add('hidden');
             chatUi.classList.remove('hidden');
             chatSuggestions.classList.remove('hidden'); // NEW
-            
+
             // Show dynamic chat/tip content
             showDynamicContent(identifiedDevice);
-            
+
             // Add a welcome message
             appendChatMessage('bot', `I'm ready to answer questions about your <b>${identifiedDevice}</b>.`);
         }
-        
+
         // --- NEW: Show Dynamic Content ---
         function showDynamicContent(deviceName) {
             const device = (deviceName || '').toLowerCase();
-            
+
             // Hide all first
             document.querySelectorAll('#tips-section .tips-container > div').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('#chat-suggestions > div').forEach(el => el.classList.add('hidden'));
 
             // Show correct tips
             document.getElementById('tips-device-name').textContent = deviceName;
-            
+
             if (device.includes('iphone') || device.includes('phone') || device.includes('smartwatch')) {
                 document.getElementById('tips-iphone').classList.remove('hidden');
                 document.getElementById('suggestions-mobile').classList.remove('hidden');
@@ -1853,7 +2637,7 @@
 
             utterance = new SpeechSynthesisUtterance(lastGeneratedText);
             utterance.lang = langCode || 'en-US'; // Default to en-US
-            
+
             // Find a matching voice (optional, but improves quality)
             const voices = synth.getVoices();
             let voice = voices.find(v => v.lang === utterance.lang);
@@ -1877,23 +2661,80 @@
             ttsIconStop.classList.remove('hidden');
         }
 
+        // NEW: Separate function for chat audio
+        function toggleChatSpeech(text, buttonEl) {
+            // Check if this exact speech is already playing. If so, stop it.
+            if (buttonEl.classList.contains('is-playing')) {
+                stopSpeech(); // This will stop all speech and reset buttons
+                return;
+            }
+
+            stopSpeech(); // Stop any other speech (main manual or other chat)
+
+            const selectedOption = languageSelect.options[languageSelect.selectedIndex];
+            const langCode = selectedOption.dataset.lang || 'en-US';
+
+            chatUtterance = new SpeechSynthesisUtterance(text);
+            chatUtterance.lang = langCode;
+
+            // Find voice
+            const voices = synth.getVoices();
+            let voice = voices.find(v => v.lang === chatUtterance.lang);
+            if (!voice) {
+                voice = voices.find(v => v.lang.startsWith(chatUtterance.lang.split('-')[0]));
+            }
+            if (voice) {
+                chatUtterance.voice = voice;
+            }
+
+            chatUtterance.onstart = () => {
+                // Reset all other buttons
+                document.querySelectorAll('.chat-listen-btn.is-playing').forEach(btn => {
+                    btn.classList.remove('is-playing');
+                    btn.querySelector('.icon-play').style.display = 'block';
+                    btn.querySelector('.icon-stop').style.display = 'none';
+                });
+                buttonEl.classList.add('is-playing');
+                buttonEl.querySelector('.icon-play').style.display = 'none';
+                buttonEl.querySelector('.icon-stop').style.display = 'block';
+            };
+
+            chatUtterance.onend = () => {
+                buttonEl.classList.remove('is-playing');
+                buttonEl.querySelector('.icon-play').style.display = 'block';
+                buttonEl.querySelector('.icon-stop').style.display = 'none';
+                chatUtterance = null;
+            };
+
+            synth.speak(chatUtterance);
+        }
+
         function stopSpeech() {
             if (synth.speaking) {
-                synth.cancel(); // Stops speech
+                synth.cancel(); // Stops all speech
             }
+            // Reset main manual button
             ttsButton.classList.remove('playing');
             ttsIconPlay.classList.remove('hidden');
             ttsIconStop.classList.add('hidden');
-            // Show play icon when stopped
-            ttsIconPlay.classList.remove('hidden');
+
+            // Reset all chat listen buttons
+            document.querySelectorAll('.chat-listen-btn.is-playing').forEach(btn => {
+                btn.classList.remove('is-playing');
+                btn.querySelector('.icon-play').style.display = 'block';
+                btn.querySelector('.icon-stop').style.display = 'none';
+            });
+
+            utterance = null;
+            chatUtterance = null;
         }
-        
+
         // Load voices on init
         synth.getVoices();
         if (synth.onvoiceschanged !== undefined) {
             synth.onvoiceschanged = synth.getVoices;
         }
-        
+
         // --- Download Logic ---
         downloadBtn.addEventListener('click', () => {
             if (!lastGeneratedText) return;
@@ -1922,17 +2763,17 @@
             chatFormData.append("device", identifiedDevice);
             chatFormData.append("question", question);
             chatFormData.append("language", languageSelect.value);
-            
+
             let userMessage = question;
-            
+
             // Handle file attachment
             if (chatFile) {
                 chatFormData.append("file", chatFile, chatFile.name);
-                
+
                 // Create a preview URL for the message
                 const previewUrl = URL.createObjectURL(chatFile);
                 userMessage = `<img src="${previewUrl}" alt="User upload"><br>${question}`;
-                
+
                 // Clear the preview
                 chatFile = null;
                 chatFileInput.value = '';
@@ -1954,21 +2795,21 @@
                     const errorData = await response.json();
                     throw new Error(errorData.detail || 'Chat submission failed');
                 }
-                
+
                 const result = await response.json();
-                
+
                 // Remove the "Typing..." message
                 const typingIndicator = chatHistory.querySelector('.typing');
-                if(typingIndicator) typingIndicator.remove();
-                
+                if (typingIndicator) typingIndicator.remove();
+
                 // Add the bot's real answer
                 appendChatMessage('bot', result.answer);
 
             } catch (error) {
-                 // Remove the "Typing..." message
+                // Remove the "Typing..." message
                 const typingIndicator = chatHistory.querySelector('.typing');
-                if(typingIndicator) typingIndicator.remove();
-                
+                if (typingIndicator) typingIndicator.remove();
+
                 // *** UPDATED CATCH BLOCK ***
                 let errorMsg = "An unknown error occurred.";
                 if (error instanceof Error) {
@@ -1979,28 +2820,62 @@
                 appendChatMessage('bot', `Sorry, I had trouble with that: ${errorMsg}`);
             }
         });
-        
+
         function appendChatMessage(sender, message) {
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('chat-message', `chat-${sender}`);
-            
+
             if (message === 'Typing...') {
                 msgDiv.classList.add('typing');
                 msgDiv.innerHTML = '<i>Typing...</i>';
             } else {
-                msgDiv.innerHTML = message; // Message is already HTML
+                // 1. Clean text for speech
+                const cleanText = message.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+                // 2. Format HTML for display
+                const formattedMessage = message
+                    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+                    .replace(/## (.*)/g, '<h3>$1</h3>')
+                    .replace(/### (.*)/g, '<h4>$1</h4>')
+                    .replace(/\* (.*)/g, '<li>$1</li>')
+                    .replace(/(\<li>.*<\/li>)/gs, '<ul>$1</ul>')
+                    .replace(/\n/g, '<br>')
+                    .replace(/<br><br>/g, '<br>')
+                    .replace(/<\/ul><br>/g, '</ul>');
+
+                // 3. Create the message content
+                const messageContent = document.createElement('div');
+                messageContent.innerHTML = formattedMessage;
+
+                msgDiv.appendChild(messageContent);
+
+                // 4. Add listen button for bot messages
+                if (sender === 'bot') {
+                    const listenBtn = document.createElement('button');
+                    listenBtn.className = 'chat-listen-btn';
+                    listenBtn.setAttribute('aria-label', 'Listen to message');
+                    listenBtn.innerHTML = `
+                        <svg class="icon-play" style="display: block;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M17.657 6.343a9 9 0 010 12.728M9 19V5l7 7-7 7z"></path></svg>
+                        <svg class="icon-stop" style="display: none;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    `;
+
+                    listenBtn.addEventListener('click', () => {
+                        toggleChatSpeech(cleanText, listenBtn); // Use new toggle function
+                    });
+
+                    msgDiv.appendChild(listenBtn);
+                }
             }
-            
+
             chatHistory.appendChild(msgDiv);
-            // Scroll to the bottom
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }
-        
+
         // --- Chat Attachment Logic ---
         chatAttachBtn.addEventListener('click', () => {
             chatFileInput.click();
         });
-        
+
         chatFileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file && file.type.startsWith('image/')) {
@@ -2013,13 +2888,13 @@
                 reader.readAsDataURL(file);
             }
         });
-        
+
         chatRemovePreview.addEventListener('click', () => {
             chatFile = null;
             chatFileInput.value = '';
             chatPreviewContainer.classList.add('hidden');
         });
-        
+
         // --- Voice Input Logic ---
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
@@ -2057,7 +2932,7 @@
 
             micBtn.addEventListener('click', () => {
                 if (synth.speaking) stopSpeech();
-                
+
                 if (micBtn.classList.contains('is-listening')) {
                     recognition.stop();
                 } else {
@@ -2070,14 +2945,14 @@
             micBtn.style.display = 'none'; // Hide mic if not supported
         }
 
-        
+
         // --- Chat Suggestion Logic ---
         const suggestionChips = document.querySelectorAll('.suggestion-chip');
         suggestionChips.forEach(chip => {
             chip.addEventListener('click', () => {
                 const question = chip.textContent;
                 chatInput.value = question; // Put text in input
-                
+
                 // Manually create and dispatch a submit event
                 const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
                 chatForm.dispatchEvent(submitEvent);
@@ -2088,33 +2963,33 @@
         // --- Text Search Logic ---
         const searchForm = document.getElementById('search-form');
         const searchInput = document.getElementById('search-input');
-        
+
         searchForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const query = searchInput.value;
             if (!query) return;
-            
+
             // Scroll up to the generator section to show the output
             document.getElementById('generator').scrollIntoView();
-            
+
             // Call the new text-based generation function
             generateManualFromText(query);
         });
-        
+
         // --- Library Button Logic ---
         const libraryButtons = document.querySelectorAll('.library-view-btn');
         libraryButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const query = button.dataset.query;
                 searchInput.value = query; // Pre-fill the search bar
-                
+
                 // Scroll to the search section
                 document.getElementById('search').scrollIntoView();
-                
+
                 //- REMOVED: generateManualFromText(query);
             });
         });
-        
+
         // --- NEW: View More Logic ---
         const viewMoreBtn = document.getElementById('view-more-btn');
         const viewLessBtn = document.getElementById('view-less-btn');
@@ -2128,7 +3003,7 @@
                     shownCount++;
                 }
             }
-            
+
             // If no more hidden cards, hide View More
             if (document.querySelectorAll('.library-card.hidden-card').length === 0) {
                 viewMoreBtn.classList.add('hidden');
@@ -2174,10 +3049,10 @@
                         });
                         if (response.ok) break;
                         if (response.status === 429) throw new Error('Rate limited');
-                        
+
                         const errorData = await response.json();
                         throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
-                        
+
                     } catch (error) {
                         if (error.message.includes('Rate limited') && retries > 1) {
                             retries--;
@@ -2194,7 +3069,7 @@
                 }
 
                 const result = await response.json();
-                
+
                 if (result.manual_text) {
                     showContent(result.manual_text);
                 } else {
@@ -2209,7 +3084,7 @@
                 }
             }
         }
-        
+
         // --- Call Backend (from Text) ---
         async function generateManualFromText(query) {
             if (!query) {
@@ -2220,6 +3095,44 @@
 
             try {
                 const language = languageSelect.value;
+
+                // --- NEW: Real Image URLs ---
+                // We add a few popular images here. For a full-scale app,
+                // the backend would use an image search API.
+                const lowerQuery = query.toLowerCase();
+
+                // Set default placeholder
+                const encodedQuery = encodeURIComponent(query);
+                imagePreview.src = `https://placehold.co/600x400/9CA3AF/FFF?text=${encodedQuery}`;
+                imagePreview.alt = query;
+
+                // Check for popular devices
+                if (lowerQuery.includes('iphone') || lowerQuery.includes('phone')) {
+                    imagePreview.src = 'https://www.apple.com/v/iphone-15-pro/c/images/overview/design/design_hero_1__c8v65i6wz0gi_large.jpg';
+                    imagePreview.alt = 'Apple iPhone';
+                } else if (lowerQuery.includes('laptop') || lowerQuery.includes('dell')) {
+                    imagePreview.src = 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=pjpg&pscan=auto&scl=1&hei=402&wid=677&qlt=100,1&resMode=sharp2&size=677,402&chrss=full';
+                    imagePreview.alt = 'Dell XPS Laptop';
+                } else if (lowerQuery.includes('gopro') || (lowerQuery.includes('camera') && lowerQuery.includes('action'))) {
+                    imagePreview.src = 'https://gopro.com/on/demandware.static/-/Library-Sites-GoProSharedLibrary/default/dwe7f5164f/images/product-page/hero12-black/H12_Carousel-1-Desktop-1920x860.jpg';
+                    imagePreview.alt = 'GoPro Action Camera';
+                } else if (lowerQuery.includes('fridge') || lowerQuery.includes('refrigerator')) {
+                    imagePreview.src = 'https://image-us.samsung.com/SamsungUS/home/home-appliances/refrigerators/4-door-french-door/pdp/rf29cu9680sr-aa/gallery/01_RF29CU9680SR_Silver_Front.jpg';
+                    imagePreview.alt = 'Samsung Refrigerator';
+                } else if (lowerQuery.includes('printer')) {
+                    imagePreview.src = 'https://www.hp.com/us-en/shop/app/assets/images/product/60K48A/60K48A_400x400.jpg';
+                    imagePreview.alt = 'HP Printer';
+                } else if (lowerQuery.includes('tv') || lowerQuery.includes('television')) {
+                    imagePreview.src = 'https://image.samsung.com/is/image/samsung/p6pim/in/qa65qn90cakxxl/gallery/in-qled-tv-qa65qn90cakxxl-531818274?$650_519_PNG$';
+                    imagePreview.alt = 'Samsung Smart TV';
+                }
+                // --- End of New Image Logic ---
+
+                imagePreviewContainer.classList.remove('hidden');
+                dropZone.classList.add('hidden');
+                file = null; // Ensure file is null so generateBtn is disabled
+                generateBtn.disabled = true;
+
 
                 let response;
                 let retries = 3;
@@ -2235,13 +3148,13 @@
                                 language: language
                             })
                         });
-                        
+
                         if (response.ok) break;
                         if (response.status === 429) throw new Error('Rate limited');
-                        
+
                         const errorData = await response.json();
                         throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
-                        
+
                     } catch (error) {
                         if (error.message.includes('Rate limited') && retries > 1) {
                             retries--;
@@ -2258,7 +3171,7 @@
                 }
 
                 const result = await response.json();
-                
+
                 if (result.manual_text) {
                     showContent(result.manual_text);
                 } else {
@@ -2275,5 +3188,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>

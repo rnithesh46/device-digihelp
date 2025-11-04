@@ -5,3 +5,5 @@ fastapi-cors
 pillow
 google-generativeai
 python-dotenv
+
+httpx

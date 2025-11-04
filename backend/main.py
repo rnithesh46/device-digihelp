@@ -10,20 +10,23 @@ import smtplib
 import ssl
 from email.message import EmailMessage
 from dotenv import load_dotenv
-from typing import Optional # Import Optional
-from pathlib import Path  # <-- 1. ADD THIS IMPORT
+from typing import Optional 
+from pathlib import Path
+from googleapiclient.discovery import build # <-- NEW IMPORT
 
-# --- FIX: Point load_dotenv to the correct .env file ---
-# This finds the directory where main.py is and looks for .env in that same directory
+# --- Load .env file ---
 env_path = Path(__file__).parent / ".env"
-load_dotenv(dotenv_path=env_path) # <-- 2. UPDATE THIS LINE
+load_dotenv(dotenv_path=env_path) 
 
 # 1. Load Environment Variables
-# These are now loaded from your .env file
 API_KEY = os.getenv("GEMINI_API_KEY")
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_APP_PASSWORD = os.getenv("SENDER_APP_PASSWORD")
 YOUR_NAME = "DeviceDigiHelp Support"
+
+# --- NEW: Load Search API Keys ---
+CUSTOM_SEARCH_API_KEY = os.getenv("CUSTOM_SEARCH_API_KEY")
+SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
 
 # 2. Validate Environment Variables
 if not API_KEY:
@@ -33,10 +36,16 @@ if not SENDER_EMAIL:
 if not SENDER_APP_PASSWORD:
     raise ValueError("SENDER_APP_PASSWORD environment variable not set (your 16-character App Password). Please set it in your backend/.env file.")
 
+# --- NEW: Validate Search Keys ---
+if not CUSTOM_SEARCH_API_KEY:
+    raise ValueError("CUSTOM_SEARCH_API_KEY environment variable not set. Please set it in your backend/.env file.")
+if not SEARCH_ENGINE_ID:
+    raise ValueError("SEARCH_ENGINE_ID environment variable not set. Please set it in your backend/.env file.")
+
 # 3. Configure Gemini
 genai.configure(api_key=API_KEY)
 
-# *** UPDATED Manual Prompt (from Image) ***
+# --- Prompts (Unchanged) ---
 MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are an expert tech assistant. A user has uploaded an image of a device.
 You MUST generate your entire response in the following language: {language}.
 Your response must be formatted in simple HTML.
@@ -59,7 +68,6 @@ RULES FOR FORMATTING:
 - Do NOT use any markdown characters like '##', '###', '*', or '**'.
 """
 
-# *** UPDATED Manual Prompt (from Text) ***
 TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE = """You are an expert tech assistant. A user has provided a device name.
 You MUST generate your entire response in the following language: {language}.
 Your response must be formatted in simple HTML.
@@ -84,7 +92,6 @@ RULES FOR FORMATTING:
 - Do NOT use any markdown characters like '##', '###', '*', or '**'.
 """
 
-# *** UPDATED Chatbot Prompt (Multimodal) ***
 CHAT_SYSTEM_PROMPT_TEMPLATE = """You are a helpful, expert tech assistant. You are acting as a chatbot.
 The user has already identified a device, which will be provided as 'Device Context'.
 You MUST generate your entire response in the following language: {language}.
@@ -98,7 +105,6 @@ Your job is to answer the user's follow-up questions with detailed, accurate, an
 """
 
 try:
-    # We will create model instances dynamically
     generation_config = genai.GenerationConfig(
         temperature=0.7,
         top_p=1,
@@ -114,7 +120,7 @@ app = FastAPI(title="Device DigiHelp API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all for simplicity
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -130,10 +136,7 @@ class TextManualRequest(BaseModel):
     query: str
     language: str
 
-# Note: We no longer use a Pydantic model for the chat, as it now uses FormData
-
 # --- Helper Function for Sending Email ---
-
 def send_email(subject: str, body: str, reply_to: EmailStr = None):
     try:
         msg = EmailMessage()
@@ -153,9 +156,27 @@ def send_email(subject: str, body: str, reply_to: EmailStr = None):
     except Exception as e:
         print(f"--- EMAIL SENDING FAILED ---")
         print(f"Error: {e}")
-        print("Please check your SENDER_EMAIL and SENDER_APP_PASSWORD.")
-        print("------------------------------")
         return False
+
+# --- NEW: Helper Function for Google Image Search ---
+def get_image_url(query: str) -> Optional[str]:
+    try:
+        service = build("customsearch", "v1", developerKey=CUSTOM_SEARCH_API_KEY)
+        result = service.cse().list(
+            q=query,
+            cx=SEARCH_ENGINE_ID,
+            searchType="image",
+            num=1,
+            safe="high" # Enable safe search
+        ).execute()
+        
+        if "items" in result and len(result["items"]) > 0:
+            return result["items"][0]["link"]
+        else:
+            return None
+    except Exception as e:
+        print(f"Error during image search: {e}")
+        return None
 
 # --- API Endpoints ---
 
@@ -168,77 +189,63 @@ async def generate_manual(
     language: str = Form("English"),
     file: UploadFile = File(...)
 ):
-    
     try:
         image_bytes = await file.read()
         img = Image.open(io.BytesIO(image_bytes))
-
-        # Create the dynamic system prompt
         dynamic_system_prompt = MANUAL_SYSTEM_PROMPT_TEMPLATE.format(language=language)
-
         safety_settings = [
             {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
         ]
-
-        # Re-creating the model with new instructions for each call
         instructed_model = genai.GenerativeModel(
             model_name="gemini-2.5-flash-preview-09-2025",
             system_instruction=dynamic_system_prompt
         )
-        
-        # *** FIX ***: Added a simple text prompt to accompany the image.
-        # This can help resolve 500 errors from the API.
         user_prompt_text = "Please identify this device and generate its manual."
-        
         response = instructed_model.generate_content(
-            [user_prompt_text, img], # Send text AND image
+            [user_prompt_text, img],
             generation_config=generation_config,
             safety_settings=safety_settings,
             stream=False,
         )
-
         if response and response.text:
-            return {"manual_text": response.text}
+            return {"manual_text": response.text, "image_url": None} # No image URL needed here
         else:
             raise HTTPException(status_code=500, detail="Failed to generate content or response was blocked.")
-
     except Exception as e:
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
 
-# --- Generate Manual from Text Endpoint ---
+# --- UPDATED: Generate Manual from Text Endpoint ---
 @app.post("/generate-manual-from-text/")
 async def generate_manual_from_text(request: TextManualRequest):
     try:
-        # Create the dynamic system prompt
+        # --- NEW: Call image search first ---
+        image_url = get_image_url(request.query)
+        
         dynamic_system_prompt = TEXT_MANUAL_SYSTEM_PROMPT_TEMPLATE.format(language=request.language)
-
         safety_settings = [
             {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
         ]
-
-        # Re-creating the model with new instructions for each call
         instructed_model = genai.GenerativeModel(
             model_name="gemini-2.5-flash-preview-09-2025",
             system_instruction=dynamic_system_prompt
         )
-        
-        # Send the user's text query
         response = instructed_model.generate_content(
-            [request.query], # Send just the text query
+            [request.query],
             generation_config=generation_config,
             safety_settings=safety_settings,
             stream=False,
         )
 
         if response and response.text:
-            return {"manual_text": response.text}
+            # --- NEW: Return both manual and image URL ---
+            return {"manual_text": response.text, "image_url": image_url}
         else:
             raise HTTPException(status_code=500, detail="Failed to generate content or response was blocked.")
 
@@ -257,40 +264,30 @@ async def ask_follow_up(
 ):
     
     try:
-        # Create the dynamic system prompt for the chat
         dynamic_chat_prompt = CHAT_SYSTEM_PROMPT_TEMPLATE.format(language=language)
-        
-        # Initialize the chat model with the new prompt
         chat_model = genai.GenerativeModel(
             model_name="gemini-2.5-flash-preview-09-2025",
             system_instruction=dynamic_chat_prompt
         )
-        
         safety_settings = [
             {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
             {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
         ]
-
-        # Build the prompt list
         prompt_parts = []
         prompt_parts.append(f"Device Context: {device}")
         
-        # Add the image if it exists
         if file:
             if not file.content_type.startswith("image/"):
                 raise HTTPException(status_code=400, detail="Invalid file type for chat. Please upload an image.")
-            
             image_bytes = await file.read()
             img = Image.open(io.BytesIO(image_bytes))
             prompt_parts.append("Here is an image related to my question:")
             prompt_parts.append(img)
         
-        # Add the user's text question
         prompt_parts.append(f"User Question: {question}")
         
-        # Send all parts to the model
         response = chat_model.generate_content(
             prompt_parts,
             generation_config=generation_config,
