@@ -329,7 +329,25 @@ async def submit_contact_form(form_data: ContactForm):
         print(f"Error in contact form: {e}")
         raise HTTPException(status_code=500, detail="Error processing contact form.")
 
-# 5. Run the App
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# --- NEW: Helper Function for Google Image Search ---
+def get_image_url(query: str) -> Optional[str]:
+    try:
+        service = build("customsearch", "v1", developerKey=CUSTOM_SEARCH_API_KEY)
+        result = service.cse().list(
+            q=query,
+            cx=SEARCH_ENGINE_ID,
+            searchType="image",
+            num=1,
+            safe="high" # Enable safe search
+        ).execute()
+        
+        if "items" in result and len(result["items"]) > 0:
+            return result["items"][0]["link"]
+        else:
+            return None
+    except Exception as e:
+        print(f"Error during image search: {e}")
+        return None
+
+# --- API Endpoints ---
 
