@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+fastapi-cors
+pillow
+google-generativeai
+python-dotenv
+google-api-python-client
+httpx
+requests
+pydantic
+email-validator
+

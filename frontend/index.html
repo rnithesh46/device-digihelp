@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Device DigiHelp - AI Manuals & Tech Support</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- Base & Reset --- */
@@ -2201,7 +2203,8 @@
     -->
     <script type="module">
         // --- Backend URL ---
-        const backendBaseUrl = "http://127.0.0.1:8000";
+        const backendBaseUrl = "https://device-digihelp-3q23.vercel.app/";
+        // const backendBaseUrl = "/api"; // relative to deployed domain
         const manualBackendUrl = `${backendBaseUrl}/generate-manual/`;
         const textManualBackendUrl = `${backendBaseUrl}/generate-manual-from-text/`; // NEW
         const chatBackendUrl = `${backendBaseUrl}/ask-follow-up/`;

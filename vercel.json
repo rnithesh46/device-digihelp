@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/*.py": { "runtime": "python3.11" }
+  },
+  "rewrites": [
+    { "source": "/favicon.ico", "destination": "/frontend/favicon.ico" },
+    { "source": "/favicon.png", "destination": "/frontend/favicon.png" },
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/(.*)", "destination": "/frontend/index.html" }
+  ]
+}
+
