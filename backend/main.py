@@ -13,7 +13,17 @@ from dotenv import load_dotenv
 from typing import Optional 
 from pathlib import Path
 from googleapiclient.discovery import build 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://device-digihelp.vercel.app", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["POST", "OPTIONS"],
+    allow_headers=["*"],
+)
 # --- SIMPLIFIED .env LOADING ---
 # This will load the .env file if it exists (on your computer)
 # On Vercel, it will do nothing, and the Vercel environment variables will be used instead.

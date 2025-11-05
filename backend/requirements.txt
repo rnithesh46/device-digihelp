@@ -7,3 +7,4 @@ google-generativeai
 python-dotenv
 google-api-python-client
 httpx
+requests
