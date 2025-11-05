@@ -8,3 +8,5 @@ python-dotenv
 google-api-python-client
 httpx
 requests
+pydantic
+email-validator

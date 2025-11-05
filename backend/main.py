@@ -13,17 +13,7 @@ from dotenv import load_dotenv
 from typing import Optional 
 from pathlib import Path
 from googleapiclient.discovery import build 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://device-digihelp.vercel.app", "http://localhost:3000"],
-    allow_credentials=True,
-    allow_methods=["POST", "OPTIONS"],
-    allow_headers=["*"],
-)
 # --- SIMPLIFIED .env LOADING ---
 # This will load the .env file if it exists (on your computer)
 # On Vercel, it will do nothing, and the Vercel environment variables will be used instead.
@@ -38,12 +28,13 @@ CUSTOM_SEARCH_API_KEY = os.getenv("CUSTOM_SEARCH_API_KEY")
 SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
 
 # 2. Validate Environment Variables
+# We check this *after* load_dotenv()
 if not API_KEY:
     raise ValueError("GEMINI_API_KEY environment variable not set. Please set it in your .env file or Vercel settings.")
 if not SENDER_EMAIL:
-    raise ValueError("SENDER_EMAIL environment variable not set. Please set it in your .env file or Vercel settings.")
+    raise ValueError("SENDER_EMAIL environment variable not set (your Gmail address). Please set it in your .env file or Vercel settings.")
 if not SENDER_APP_PASSWORD:
-    raise ValueError("SENDER_APP_PASSWORD environment variable not set. Please set it in your .env file or Vercel settings.")
+    raise ValueError("SENDER_APP_PASSWORD environment variable not set (your 16-character App Password). Please set it in your .env file or Vercel settings.")
 if not CUSTOM_SEARCH_API_KEY:
     raise ValueError("CUSTOM_SEARCH_API_KEY environment variable not set. Please set it in your .env file or Vercel settings.")
 if not SEARCH_ENGINE_ID:
@@ -339,4 +330,3 @@ async def submit_contact_form(form_data: ContactForm):
 # 5. Run the App
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
