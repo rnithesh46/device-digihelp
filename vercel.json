@@ -1,0 +1,10 @@
+{
+    "functions": { "api/*.py": { "runtime": "python3.11" } },
+    "routes": [
+      { "src": "/generate-manual/?", "dest": "api/generate_manual.py" },
+      { "src": "/generate-manual-from-text/?", "dest": "api/generate_manual_from_text.py" },
+      { "src": "/ask-follow-up/?", "dest": "api/ask_follow_up.py" },
+      { "src": "/contact-submit/?", "dest": "api/contact_submit.py" },
+      { "src": "/favicon.(ico|png)", "status": 404 }
+    ]
+  }
