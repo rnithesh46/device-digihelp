@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Device DigiHelp - Instant AI device manuals and chatbot support for phones, appliances, TVs, laptops, and more.">
+    <meta property="og:title" content="Device DigiHelp - Instant AI Manuals & Support">
+    <meta property="og:description" content="Upload a device photo or search by name to get quick-start guides and chat help.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://device-digihelp.vercel.app/">
+    <meta property="og:image" content="https://device-digihelp.vercel.app/favicon.png">
     <title>Device DigiHelp - AI Manuals & Tech Support</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -2650,6 +2656,20 @@
         });
 
         function handleFile(selectedFile) {
+            const MAX_SIZE_BYTES = 4 * 1024 * 1024; // 4MB limit for serverless uploads
+            if (!selectedFile) {
+                showError("Please select an image file.");
+                return;
+            }
+            if (!selectedFile.type.startsWith('image/')) {
+                showError("Please select a valid image file (PNG, JPG, GIF).");
+                return;
+            }
+            if (selectedFile.size > MAX_SIZE_BYTES) {
+                showError("Image is too large. Please upload an image under 4MB.");
+                return;
+            }
+
             if (selectedFile && selectedFile.type.startsWith('image/')) {
                 file = selectedFile;
                 const reader = new FileReader();
@@ -2667,6 +2687,20 @@
         }
 
         generateBtn.addEventListener('click', generateManualFromImage);
+
+        // Helper to read error payloads safely
+        async function readErrorResponse(response) {
+            try {
+                const data = await response.json();
+                return data.detail || JSON.stringify(data);
+            } catch (_e) {
+                try {
+                    return await response.text();
+                } catch (_e2) {
+                    return `HTTP ${response.status}`;
+                }
+            }
+        }
 
         // --- Output State Management ---
         function resetOutput() {
@@ -3299,8 +3333,8 @@
                         if (response.ok) break;
                         if (response.status === 429) throw new Error('Rate limited');
 
-                        const errorData = await response.json();
-                        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                        const errorDetail = await readErrorResponse(response);
+                        throw new Error(errorDetail || `HTTP error! status: ${response.status}`);
 
                     } catch (error) {
                         if (error.message.includes('Rate limited') && retries > 1) {
@@ -3314,7 +3348,8 @@
                 }
 
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch from backend. Status: ${response.status}`);
+                    const errorDetail = await readErrorResponse(response);
+                    throw new Error(`Failed to fetch from backend. Status: ${response.status}. ${errorDetail}`);
                 }
 
                 const result = await response.json();
@@ -3401,8 +3436,8 @@
                         if (response.ok) break;
                         if (response.status === 429) throw new Error('Rate limited');
 
-                        const errorData = await response.json();
-                        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                        const errorDetail = await readErrorResponse(response);
+                        throw new Error(errorDetail || `HTTP error! status: ${response.status}`);
 
                     } catch (error) {
                         if (error.message.includes('Rate limited') && retries > 1) {
@@ -3416,7 +3451,8 @@
                 }
 
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch from backend. Status: ${response.status}`);
+                    const errorDetail = await readErrorResponse(response);
+                    throw new Error(`Failed to fetch from backend. Status: ${response.status}. ${errorDetail}`);
                 }
 
                 const result = await response.json();

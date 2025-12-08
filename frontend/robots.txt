@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://device-digihelp.vercel.app/sitemap.xml
+

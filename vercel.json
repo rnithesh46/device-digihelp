@@ -5,6 +5,8 @@
   "rewrites": [
     { "source": "/favicon.ico", "destination": "/frontend/favicon.ico" },
     { "source": "/favicon.png", "destination": "/frontend/favicon.png" },
+    { "source": "/robots.txt", "destination": "/frontend/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/frontend/sitemap.xml" },
     { "source": "/api/(.*)", "destination": "/api/index.py" },
     { "source": "/(.*)", "destination": "/frontend/index.html" }
   ]
