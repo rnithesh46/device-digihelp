@@ -1351,6 +1351,26 @@
             #contact-form {
                 padding: 2.5rem;
             }
+
+        }
+
+        /* Analytics */
+        #analytics {
+            background-color: #F3F4F6;
+        }
+
+        .chart-card {
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        #results-chart {
+            width: 100%;
+            max-width: 100%;
+            height: 320px;
         }
     </style>
 </head>
@@ -1655,6 +1675,82 @@
                             <p class="tip-body">"Don't just guess with detergent! Too much can leave residue. I found
                                 that one tablespoon of liquid is enough for most loads."</p>
                             <span class="tip-author">- CleanFreak</span>
+                        </div>
+                    </div>
+                    <!-- Smart Home Tips -->
+                    <div id="tips-smart-home" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Name your rooms and devices in the app; it makes voice commands way more reliable."</p>
+                            <span class="tip-author">- HomeAuto</span>
+                        </div>
+                        <div class="tip">
+                            <p class="tip-body">"For robot vacuums, add virtual walls/no-go zones in the app to stop cable tangles."</p>
+                            <span class="tip-author">- CleanPath</span>
+                        </div>
+                    </div>
+                    <!-- Office Tips -->
+                    <div id="tips-office" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Projectors look better at 6500K color temp; also disable keystone and physically align."</p>
+                            <span class="tip-author">- SlidePro</span>
+                        </div>
+                        <div class="tip">
+                            <p class="tip-body">"Label printers: use the correct label width setting or prints will misalign."</p>
+                            <span class="tip-author">- TagMaster</span>
+                        </div>
+                    </div>
+                    <!-- Wearable/Fitness Tips -->
+                    <div id="tips-wearable" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"For smart scales, place on a hard flat floor; carpet skews readings."</p>
+                            <span class="tip-author">- FitScale</span>
+                        </div>
+                        <div class="tip">
+                            <p class="tip-body">"Sync your fitness band after workouts to avoid missing data in the cloud."</p>
+                            <span class="tip-author">- TrackDaily</span>
+                        </div>
+                    </div>
+                    <!-- Automotive Tips -->
+                    <div id="tips-automotive" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Dashcams: use high-endurance microSD cards; they last longer under constant writes."</p>
+                            <span class="tip-author">- RoadWatch</span>
+                        </div>
+                        <div class="tip">
+                            <p class="tip-body">"Enable parking mode only if your fuse tap or battery pack can handle the draw."</p>
+                            <span class="tip-author">- ParkSafe</span>
+                        </div>
+                    </div>
+                    <!-- Home Air/Water Tips -->
+                    <div id="tips-home-infra" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Air purifiers work best centrally placed with doors open; clean pre-filters monthly."</p>
+                            <span class="tip-author">- AirCare</span>
+                        </div>
+                        <div class="tip">
+                            <p class="tip-body">"Humidifiers: use distilled water to avoid white dust; descale weekly."</p>
+                            <span class="tip-author">- HumidiHelp</span>
+                        </div>
+                    </div>
+                    <!-- E-reader Tips -->
+                    <div id="tips-ereader" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Lower warmth at night reduces blue light; also disable page refresh for smoother flips."</p>
+                            <span class="tip-author">- PageTurner</span>
+                        </div>
+                    </div>
+                    <!-- VR/AR Tips -->
+                    <div id="tips-vr" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Run the headset fit guide; blurry edges are usually IPD or strap tension."</p>
+                            <span class="tip-author">- VRGuide</span>
+                        </div>
+                    </div>
+                    <!-- Streaming Stick Tips -->
+                    <div id="tips-streaming" class="hidden">
+                        <div class="tip">
+                            <p class="tip-body">"Use the 5GHz band for 4K streams; if buffering, drop resolution to 1080p."</p>
+                            <span class="tip-author">- StreamSmart</span>
                         </div>
                     </div>
                     <!-- NEW: Laptop Tips -->
@@ -2035,6 +2131,66 @@
                         <button class="suggestion-chip">How to install new apps?</button>
                         <button class="suggestion-chip">My remote isn't working</button>
                     </div>
+                    <!-- Fridge Suggestions -->
+                    <div id="suggestions-fridge" class="hidden">
+                        <button class="suggestion-chip">How to change the water filter?</button>
+                        <button class="suggestion-chip">What temperature should I set?</button>
+                        <button class="suggestion-chip">Why is there frost in the freezer?</button>
+                    </div>
+                    <!-- Washing Machine Suggestions -->
+                    <div id="suggestions-washing-machine" class="hidden">
+                        <button class="suggestion-chip">How much detergent should I use?</button>
+                        <button class="suggestion-chip">How to clean the filter?</button>
+                        <button class="suggestion-chip">What is the right cycle for towels?</button>
+                    </div>
+                    <!-- Smart Home Suggestions -->
+                    <div id="suggestions-smart-home" class="hidden">
+                        <button class="suggestion-chip">How to set up routines/automation?</button>
+                        <button class="suggestion-chip">How to link with Alexa/Google?</button>
+                        <button class="suggestion-chip">How to reset and re-pair?</button>
+                    </div>
+                    <!-- Office Suggestions -->
+                    <div id="suggestions-office" class="hidden">
+                        <button class="suggestion-chip">How to align labels?</button>
+                        <button class="suggestion-chip">Best projector settings?</button>
+                        <button class="suggestion-chip">Scan to PDF setup?</button>
+                    </div>
+                    <!-- Wearable/Fitness Suggestions -->
+                    <div id="suggestions-wearable" class="hidden">
+                        <button class="suggestion-chip">How to sync with my phone?</button>
+                        <button class="suggestion-chip">How to calibrate steps/HR?</button>
+                        <button class="suggestion-chip">How to export health data?</button>
+                    </div>
+                    <!-- Automotive Suggestions -->
+                    <div id="suggestions-automotive" class="hidden">
+                        <button class="suggestion-chip">How to wire for parking mode?</button>
+                        <button class="suggestion-chip">How to view dashcam footage?</button>
+                        <button class="suggestion-chip">Best settings for night video?</button>
+                    </div>
+                    <!-- Home Infra Suggestions -->
+                    <div id="suggestions-home-infra" class="hidden">
+                        <button class="suggestion-chip">Filter replacement schedule?</button>
+                        <button class="suggestion-chip">Auto mode vs manual?</button>
+                        <button class="suggestion-chip">When to use humidify/dehumidify?</button>
+                    </div>
+                    <!-- E-reader Suggestions -->
+                    <div id="suggestions-ereader" class="hidden">
+                        <button class="suggestion-chip">How to sideload books?</button>
+                        <button class="suggestion-chip">How to adjust warm light?</button>
+                        <button class="suggestion-chip">How to use collections?</button>
+                    </div>
+                    <!-- VR/AR Suggestions -->
+                    <div id="suggestions-vr" class="hidden">
+                        <button class="suggestion-chip">How to set IPD and fit?</button>
+                        <button class="suggestion-chip">Guardian/boundary setup?</button>
+                        <button class="suggestion-chip">Best graphics settings?</button>
+                    </div>
+                    <!-- Streaming Stick Suggestions -->
+                    <div id="suggestions-streaming" class="hidden">
+                        <button class="suggestion-chip">How to improve Wi‑Fi for 4K?</button>
+                        <button class="suggestion-chip">How to install apps/channels?</button>
+                        <button class="suggestion-chip">CEC/remote not working?</button>
+                    </div>
                     <!-- Networking Suggestions -->
                     <div id="suggestions-networking" class="hidden">
                         <button class="suggestion-chip">How to restart my router?</button>
@@ -2097,6 +2253,19 @@
                             <button type="submit" id="chat-submit" class="btn btn-primary">Send</button>
                         </form>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Results Analysis</h2>
+                    <p>Manual generation volume by device type (last 14 days)</p>
+                </div>
+                <div class="chart-card">
+                    <canvas id="results-chart" aria-label="Manual generation analytics" role="img"></canvas>
                 </div>
             </div>
         </section>
@@ -2201,6 +2370,7 @@
     UPDATED JAVASCRIPT
     ============================================================
     -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module">
         // --- Backend URL ---
         const backendBaseUrl = "https://device-digihelp-3q23.vercel.app";
@@ -2209,6 +2379,58 @@
         const textManualBackendUrl = `${backendBaseUrl}/generate-manual-from-text/`; // NEW
         const chatBackendUrl = `${backendBaseUrl}/ask-follow-up/`;
         const contactBackendUrl = `${backendBaseUrl}/contact-submit/`;
+
+        // --- Results Analysis Chart (sample data) ---
+        const resultsChartEl = document.getElementById('results-chart');
+        if (resultsChartEl && window.Chart) {
+            const ctx = resultsChartEl.getContext('2d');
+            const labels = ["Phones", "Laptops", "TVs", "Washing Machines", "Fridges", "Audio"];
+            const successData = [42, 28, 25, 18, 16, 20];
+            const errorData = [4, 3, 2, 5, 4, 3];
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            label: "Successful manuals",
+                            data: successData,
+                            backgroundColor: "rgba(59, 130, 246, 0.75)",
+                            borderColor: "rgba(59, 130, 246, 1)",
+                            borderWidth: 1
+                        },
+                        {
+                            label: "Errors / retries",
+                            data: errorData,
+                            backgroundColor: "rgba(239, 68, 68, 0.75)",
+                            borderColor: "rgba(239, 68, 68, 1)",
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: "bottom" },
+                        title: {
+                            display: true,
+                            text: "Manual requests (last 14 days)"
+                        },
+                        tooltip: { mode: "index", intersect: false }
+                    },
+                    scales: {
+                        x: { stacked: false },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 5 },
+                            title: { display: true, text: "Requests" }
+                        }
+                    }
+                }
+            });
+        }
 
         // --- Mobile Menu Toggle ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -2614,6 +2836,30 @@
             } else if (device.includes('playstation') || device.includes('xbox') || device.includes('console')) {
                 document.getElementById('tips-gaming').classList.remove('hidden');
                 document.getElementById('suggestions-gaming').classList.remove('hidden');
+            } else if (device.includes('thermostat') || device.includes('lock') || device.includes('doorbell') || device.includes('light') || device.includes('vacuum')) {
+                document.getElementById('tips-smart-home').classList.remove('hidden');
+                document.getElementById('suggestions-smart-home').classList.remove('hidden');
+            } else if (device.includes('projector') || device.includes('scanner') || device.includes('label')) {
+                document.getElementById('tips-office').classList.remove('hidden');
+                document.getElementById('suggestions-office').classList.remove('hidden');
+            } else if (device.includes('wearable') || device.includes('fitness') || device.includes('band') || device.includes('scale') || device.includes('glucose')) {
+                document.getElementById('tips-wearable').classList.remove('hidden');
+                document.getElementById('suggestions-wearable').classList.remove('hidden');
+            } else if (device.includes('dashcam') || device.includes('car') || device.includes('infotainment')) {
+                document.getElementById('tips-automotive').classList.remove('hidden');
+                document.getElementById('suggestions-automotive').classList.remove('hidden');
+            } else if (device.includes('purifier') || device.includes('humidifier') || device.includes('dehumidifier') || device.includes('water purifier')) {
+                document.getElementById('tips-home-infra').classList.remove('hidden');
+                document.getElementById('suggestions-home-infra').classList.remove('hidden');
+            } else if (device.includes('kindle') || device.includes('ereader') || device.includes('e-reader')) {
+                document.getElementById('tips-ereader').classList.remove('hidden');
+                document.getElementById('suggestions-ereader').classList.remove('hidden');
+            } else if (device.includes('vr') || device.includes('quest') || device.includes('headset')) {
+                document.getElementById('tips-vr').classList.remove('hidden');
+                document.getElementById('suggestions-vr').classList.remove('hidden');
+            } else if (device.includes('chromecast') || device.includes('roku') || device.includes('fire tv') || device.includes('streaming')) {
+                document.getElementById('tips-streaming').classList.remove('hidden');
+                document.getElementById('suggestions-streaming').classList.remove('hidden');
             } else {
                 document.getElementById('tips-generic').classList.remove('hidden');
                 document.getElementById('suggestions-generic').classList.remove('hidden');
